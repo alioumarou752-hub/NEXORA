@@ -95,8 +95,8 @@
 <main>
 
     <section class="welcome">
-        <h1>Bienvenue sur NEXORA 👋</h1>
-        <p id="userEmail">Chargement de votre compte...</p>
+        <h1 id="welcomeMessage">Bienvenue sur NEXORA 👋</h1>
+<p id="userEmail">Chargement de votre compte...</p>
     </section>
 
     <section class="cards">
@@ -151,8 +151,18 @@ async function verifierConnexion() {
         return;
     }
 
-    document.getElementById("userEmail").textContent =
-        "Connecté avec : " + user.email;
+    const nom = user.user_metadata?.nom || "";
+const prenom = user.user_metadata?.prenom || "";
+
+const nomComplet = (prenom + " " + nom).trim();
+
+document.getElementById("welcomeMessage").textContent =
+    nomComplet
+        ? "Bienvenue, " + nomComplet + " 👋"
+        : "Bienvenue sur NEXORA 👋";
+
+document.getElementById("userEmail").textContent =
+    "Connecté avec : " + user.email;
 }
 
 verifierConnexion();
