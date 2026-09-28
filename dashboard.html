@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA — Tableau de bord</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        header {
+            background: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logout {
+            border: none;
+            background: #172033;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .welcome {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+        }
+
+        .welcome h1 {
+            margin-bottom: 10px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .card h2 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #667085;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">NEXORA</div>
+
+    <button class="logout" id="logoutButton">
+        Se déconnecter
+    </button>
+</header>
+
+<main>
+
+    <section class="welcome">
+        <h1>Bienvenue sur NEXORA 👋</h1>
+        <p id="userEmail">Chargement de votre compte...</p>
+    </section>
+
+    <section class="cards">
+
+        <div class="card">
+            <h2>🚀 Mes projets</h2>
+            <p>Gérez et développez vos projets.</p>
+        </div>
+
+        <div class="card">
+            <h2>🛠️ Services</h2>
+            <p>Découvrez les services disponibles sur NEXORA.</p>
+        </div>
+
+        <div class="card">
+            <h2>💼 Entrepreneuriat</h2>
+            <p>Développez vos idées et vos activités.</p>
+        </div>
+
+        <div class="card">
+            <h2>⚙️ Mon compte</h2>
+            <p>Gérez les informations de votre compte.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://klvgazjmrxflcrfzauao.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+async function verifierConnexion() {
+
+    const { data: { user } } =
+        await supabaseClient.auth.getUser();
+
+    if (!user) {
+        window.location.href = "connexion.html";
+        return;
+    }
+
+    document.getElementById("userEmail").textContent =
+        "Connecté avec : " + user.email;
+}
+
+verifierConnexion();
+
+document.getElementById("logoutButton")
+.addEventListener("click", async function() {
+
+    await supabaseClient.auth.signOut();
+
+    window.location.href = "index.html";
+});
+
+</script>
+
+</body>
+</html>
