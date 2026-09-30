@@ -205,16 +205,43 @@ async function afficherProjets() {
 
     projets.forEach(function(projet) {
 
-        const projetElement =
-            document.createElement("div");
+    const projetElement = document.createElement("div");
 
-        projetElement.innerHTML = `
-            <h3>${projet.nom}</h3>
-            <p>${projet.description || ""}</p>
-        `;
+    projetElement.innerHTML = `
+        <h3>${projet.nom}</h3>
+        <p>${projet.description || ""}</p>
+        <button class="deleteProjectButton">
+            🗑️ Supprimer
+        </button>
+    `;
 
-        projectsList.appendChild(projetElement);
-    });
+    projetElement
+        .querySelector(".deleteProjectButton")
+        .addEventListener("click", async function() {
+
+            const confirmer = confirm(
+                "Voulez-vous vraiment supprimer ce projet ?"
+            );
+
+            if (!confirmer) {
+                return;
+            }
+
+            const { error } = await supabaseClient
+                .from("projets")
+                .delete()
+                .eq("id", projet.id);
+
+            if (error) {
+                alert("Erreur lors de la suppression.");
+                return;
+            }
+
+            projetElement.remove();
+        });
+
+    projectsList.appendChild(projetElement);
+});
 }
 
 afficherProjets();
