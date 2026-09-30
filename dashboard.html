@@ -181,10 +181,40 @@ document.getElementById("logoutButton")
     window.location.href = "index.html";
 });
 document.getElementById("createProjectButton")
-.addEventListener("click", function() {
+.addEventListener("click", async function() {
+
+    const nomProjet = prompt("Nom de votre projet :");
+
+    if (!nomProjet || !nomProjet.trim()) {
+        return;
+    }
+
+    const descriptionProjet = prompt("Description du projet :");
+
+    const { data: { user } } =
+        await supabaseClient.auth.getUser();
+
+    if (!user) {
+        window.location.href = "connexion.html";
+        return;
+    }
+
+    const { error } = await supabaseClient
+        .from("projets")
+        .insert({
+            user_id: user.id,
+            nom: nomProjet.trim(),
+            description: descriptionProjet || ""
+        });
+
+    if (error) {
+        document.getElementById("projectMessage").textContent =
+            "Erreur : " + error.message;
+        return;
+    }
 
     document.getElementById("projectMessage").textContent =
-        "🚀 La création de projet sera bientôt disponible.";
+        "✅ Projet créé avec succès !";
 });
 </script>
 
