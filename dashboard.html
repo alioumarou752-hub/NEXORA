@@ -303,7 +303,12 @@ document.getElementById("welcomeMessage").textContent =
 document.getElementById("userEmail").textContent =
     "Connecté avec : " + user.email;
 }
+document.getElementById("servicesButton")
+.addEventListener("click", function() {
 
+    document.getElementById("servicesMessage").textContent =
+        "🛠️ Les services NEXORA seront bientôt disponibles.";
+});
 verifierConnexion();
 
 document.getElementById("logoutButton")
