@@ -170,7 +170,54 @@ document.getElementById("welcomeMessage").textContent =
 document.getElementById("userEmail").textContent =
     "Connecté avec : " + user.email;
 }
+async function afficherProjets() {
 
+    const { data: { user } } =
+        await supabaseClient.auth.getUser();
+
+    if (!user) {
+        return;
+    }
+
+    const { data: projets, error } =
+        await supabaseClient
+        .from("projets")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false });
+
+    const projectsList =
+        document.getElementById("projectsList");
+
+    if (error) {
+        projectsList.textContent =
+            "Erreur lors du chargement des projets.";
+        return;
+    }
+
+    if (!projets || projets.length === 0) {
+        projectsList.textContent =
+            "Aucun projet pour le moment.";
+        return;
+    }
+
+    projectsList.innerHTML = "";
+
+    projets.forEach(function(projet) {
+
+        const projetElement =
+            document.createElement("div");
+
+        projetElement.innerHTML = `
+            <h3>${projet.nom}</h3>
+            <p>${projet.description || ""}</p>
+        `;
+
+        projectsList.appendChild(projetElement);
+    });
+}
+
+afficherProjets();
 verifierConnexion();
 
 document.getElementById("logoutButton")
