@@ -188,6 +188,11 @@ async function afficherProjets() {
     projetElement.innerHTML = `
         <h3>${projet.nom}</h3>
         <p>${projet.description || ""}</p>
+        <button
+    class="editProjectButton"
+>
+    ✏️ Modifier
+</button>
         <button class="deleteProjectButton">
             🗑️ Supprimer
         </button>
