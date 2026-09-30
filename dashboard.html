@@ -101,16 +101,18 @@
 
     <section class="cards">
 
-        <div class="card">
+<div class="card">
     <h2>🚀 Mes projets</h2>
     <p>Gérez et développez vos projets.</p>
-
+<div id="projectsList">
+    Chargement des projets...
+</div>
     <button class="projectButton" id="createProjectButton">
         + Créer un projet
     </button>
 
     <div id="projectMessage"></div>
-        </div>
+</div>
 
         <div class="card">
             <h2>🛠️ Services</h2>
@@ -146,30 +148,6 @@ window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
-
-async function verifierConnexion() {
-
-    const { data: { user } } =
-        await supabaseClient.auth.getUser();
-
-    if (!user) {
-        window.location.href = "connexion.html";
-        return;
-    }
-
-    const nom = user.user_metadata?.nom || "";
-const prenom = user.user_metadata?.prenom || "";
-
-const nomComplet = (prenom + " " + nom).trim();
-
-document.getElementById("welcomeMessage").textContent =
-    nomComplet
-        ? "Bienvenue, " + nomComplet + " 👋"
-        : "Bienvenue sur NEXORA 👋";
-
-document.getElementById("userEmail").textContent =
-    "Connecté avec : " + user.email;
-}
 async function afficherProjets() {
 
     const { data: { user } } =
@@ -245,6 +223,30 @@ async function afficherProjets() {
 }
 
 afficherProjets();
+async function verifierConnexion() {
+
+    const { data: { user } } =
+        await supabaseClient.auth.getUser();
+
+    if (!user) {
+        window.location.href = "connexion.html";
+        return;
+    }
+
+      const nom = user.user_metadata?.nom || "";
+const prenom = user.user_metadata?.prenom || "";
+
+const nomComplet = (prenom + " " + nom).trim();
+
+document.getElementById("welcomeMessage").textContent =
+    nomComplet
+        ? "Bienvenue, " + nomComplet + " 👋"
+        : "Bienvenue sur NEXORA 👋";
+
+document.getElementById("userEmail").textContent =
+    "Connecté avec : " + user.email;
+}
+
 verifierConnexion();
 
 document.getElementById("logoutButton")
@@ -288,9 +290,9 @@ document.getElementById("createProjectButton")
     }
 
     document.getElementById("projectMessage").textContent =
-        "✅ Projet créé avec succès !";
+     "✅ Projet créé avec succès !";
 });
 </script>
 
 </body>
-</html>
+</>
