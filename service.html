@@ -42,69 +42,59 @@
 
             <div class="cards">
 
+<div class="service">
+    <h3>💻 Développement web</h3>
 
-                <div class="card">
+    <p>
+        Création et développement de sites web
+        modernes et adaptés à vos besoins.
+    </p>
 
-                    <h3>💻 Développement web</h3>
+    <button onclick="demanderService('Développement web')">
+        Demander ce service
+    </button>
+</div>
 
-                    <p>
-                        Création de sites web modernes,
-                        rapides et adaptés aux besoins
-                        de votre projet.
-                    </p>
 
-                    <button class="projectButton">
-                        En savoir plus
-                    </button>
+                <div class="service">
+    <h3>📱 Applications</h3>
 
+    <p>
+        Conception de solutions numériques
+        et d'applications pour vos projets.
+    </p>
+
+    <button onclick="demanderService('Applications')">
+        Demander ce service
+    </button>
                 </div>
 
 
-                <div class="card">
+                <div class="service">
+    <h3>🎨 Design</h3>
 
-                    <h3>📱 Applications</h3>
+    <p>
+        Création d'identités visuelles,
+        interfaces et contenus numériques.
+    </p>
 
-                    <p>
-                        Conception de solutions numériques
-                        et d'applications pour vos projets.
-                    </p>
-
-                    <button class="projectButton">
-                        En savoir plus
-                    </button>
-
+    <button onclick="demanderService('Design')">
+        Demander ce service
+    </button>
                 </div>
 
 
-                <div class="card">
+                <div class="service">
+    <h3>🚀 Entrepreneuriat</h3>
 
-                    <h3>🎨 Design</h3>
+    <p>
+        Accompagnement et outils pour
+        transformer vos idées en projets.
+    </p>
 
-                    <p>
-                        Création d'identités visuelles,
-                        interfaces et contenus numériques.
-                    </p>
-
-                    <button class="projectButton">
-                        En savoir plus
-                    </button>
-
-                </div>
-
-
-                <div class="card">
-
-                    <h3>🚀 Entrepreneuriat</h3>
-
-                    <p>
-                        Accompagnement et outils pour
-                        transformer vos idées en projets.
-                    </p>
-
-                    <button class="projectButton">
-                        En savoir plus
-                    </button>
-
+    <button onclick="demanderService('Entrepreneuriat')">
+        Demander ce service
+    </button>
                 </div>
 
 
@@ -128,6 +118,61 @@
     </div>
 
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL =
+"https://klvgazjmrxflcrfzauao.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+async function demanderService(service) {
+
+    const { data: { user } } =
+        await supabaseClient.auth.getUser();
+
+    if (!user) {
+        alert("Veuillez vous connecter pour demander ce service.");
+        window.location.href = "connexion.html";
+        return;
+    }
+
+    const { error } =
+        await supabaseClient
+        .from("demande_services")
+        .insert({
+            client_id: user.id,
+            nom: (
+                (user.user_metadata?.prenom || "") +
+                " " +
+                (user.user_metadata?.nom || "")
+            ).trim(),
+            service: service,
+            description: "",
+            email: user.email,
+            statut: "en attente"
+        });
+
+    if (error) {
+        alert("Erreur : " + error.message);
+        return;
+    }
+
+    alert(
+        "✅ Votre demande pour « " +
+        service +
+        " » a bien été envoyée !"
+    );
+}
+</script>
 
 </body>
 </html>
