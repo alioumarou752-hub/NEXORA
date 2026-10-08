@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mes projets — NEXORA</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+
+    <div class="container">
+
+        <div class="logo">
+            NEXORA
+        </div>
+
+        <p>Mes projets</p>
+
+        <a href="dashboard.html" class="btn btn-secondary">
+            ← Retour au tableau de bord
+        </a>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<section class="features">
+
+<div class="container">
+
+    <h2>Mes projets 🚀</h2>
+
+    <p style="text-align:center;">
+        Créez et gérez vos projets avec NEXORA.
+    </p>
+
+
+    <!-- CRÉER UN PROJET -->
+
+    <div class="card" style="margin-top:30px;">
+
+        <h3>Créer un nouveau projet</h3>
+
+        <p>
+            Donnez un nom et une description à votre projet.
+        </p>
+
+        <input
+            type="text"
+            id="nomProjet"
+            placeholder="Nom du projet"
+            style="width:100%; padding:14px; margin-top:15px; border:1px solid #d9d9e3; border-radius:10px; font-size:16px;"
+        >
+
+        <textarea
+            id="descriptionProjet"
+            placeholder="Description de votre projet"
+            rows="5"
+            style="width:100%; padding:14px; margin-top:15px; border:1px solid #d9d9e3; border-radius:10px; font-size:16px; resize:vertical;"
+        ></textarea>
+
+        <button
+            id="creerProjetBtn"
+            class="btn btn-primary"
+            style="margin-top:15px; border:none; cursor:pointer;"
+        >
+            + Créer le projet
+        </button>
+
+        <p id="messageProjet"></p>
+
+    </div>
+
+
+    <!-- MES PROJETS -->
+
+    <div style="margin-top:40px;">
+
+        <h2>Mes projets</h2>
+
+        <div
+            id="projetsContainer"
+            class="cards"
+            style="margin-top:20px;"
+        >
+
+            <div class="card">
+                Chargement de vos projets...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="container">
+
+        <p>
+            © 2026 NEXORA — Développez vos idées.
+        </p>
+
+    </div>
+
+</footer>
+
+  <script>
+const SUPABASE_URL = "https://klvgazjmrxflcrfzauao.supabase.co";
+const SUPABASE_KEY = "sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const bouton = document.getElementById("creerProjetBtn");
+    const message = document.getElementById("messageProjet");
+
+    if (!bouton) {
+        alert("❌ Bouton créer projet introuvable.");
+        return;
+    }
+
+    bouton.addEventListener("click", async function () {
+
+        message.textContent = "⏳ Traitement en cours...";
+
+        const nom = document.getElementById("nomProjet").value.trim();
+        const description = document.getElementById("descriptionProjet").value.trim();
+
+        if (!nom) {
+            message.textContent = "⚠️ Entrez le nom du projet.";
+            return;
+        }
+
+        const { data: { user }, error: userError } =
+            await supabaseClient.auth.getUser();
+
+        if (userError || !user) {
+            message.textContent = "❌ Vous devez être connecté.";
+            return;
+        }
+
+        const { error } = await supabaseClient
+            .from("projets")
+            .insert({
+                user_id: user.id,
+                nom: nom,
+                description: description
+            });
+
+        if (error) {
+            message.textContent = "❌ Erreur : " + error.message;
+            console.error(error);
+            return;
+        }
+
+        message.textContent = "✅ Projet créé avec succès !";
+
+        document.getElementById("nomProjet").value = "";
+        document.getElementById("descriptionProjet").value = "";
+    });
+
+});
+    /* =========================
+   AFFICHER MES PROJETS
+========================= */
+
+async function chargerProjets() {
+
+    const container =
+        document.getElementById("projetsContainer");
+
+    container.innerHTML = `
+        <div class="loading">
+            Chargement de vos projets...
+        </div>
+    `;
+
+
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+
+    if (userError || !user) {
+
+        window.location.href = "connexion.html";
+
+        return;
+    }
+
+
+    const {
+        data: projets,
+        error
+    } = await supabaseClient
+        .from("projets")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", {
+            ascending: false
+        });
+
+
+    if (error) {
+
+        console.error(
+            "Erreur lors du chargement des projets :",
+            error
+        );
+
+        container.innerHTML = `
+            <div class="error">
+                Impossible de charger vos projets.
+                <br><br>
+                <button
+                    class="btn btn-primary"
+                    onclick="chargerProjets()"
+                >
+                    Réessayer
+                </button>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    if (!projets || projets.length === 0) {
+
+        container.innerHTML = `
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Aucun projet pour le moment
+                </h3>
+
+                <p>
+                    Créez votre premier projet
+                    avec le formulaire ci-dessus.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML = "";
+
+  projets.forEach(projet => {
+
+    const carte =
+        document.createElement("div");
+
+    carte.className = "card";
+
+    const date =
+        projet.created_at
+            ? new Date(
+                projet.created_at
+              ).toLocaleDateString("fr-FR")
+            : "";
+
+
+    carte.innerHTML = `
+
+        <div class="card-icon">
+            🚀
+        </div>
+
+        <h3>
+            ${projet.nom || "Projet sans nom"}
+        </h3>
+
+        <p>
+            ${
+                projet.description ||
+                "Aucune description."
+            }
+        </p>
+
+        <small>
+            Créé le ${date}
+        </small>
+
+
+        <div
+            style="
+                display:flex;
+                gap:10px;
+                flex-wrap:wrap;
+                margin-top:20px;
+            "
+        >
+<a
+    href="detail-projet.html?id=${projet.id}"
+    class="btn btn-secondary"
+    style="text-decoration:none;"
+>
+    🚀 Ouvrir
+</a>
+            <button
+                class="btn btn-primary"
+                style="border:none; cursor:pointer;"
+                onclick="modifierProjet('${projet.id}')"
+            >
+                ✏️ Modifier
+            </button>
+
+
+            <button
+                class="btn btn-danger"
+                style="border:none; cursor:pointer;"
+                onclick="supprimerProjet('${projet.id}')"
+            >
+                🗑️ Supprimer
+            </button>
+
+        </div>
+
+    `;
+
+
+    container.appendChild(carte);
+
+});
+
+}
+    /* =========================
+   MODIFIER UN PROJET
+========================= */
+
+async function modifierProjet(id) {
+
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+
+    if (userError || !user) {
+
+        window.location.href =
+            "connexion.html";
+
+        return;
+    }
+
+
+    /* Récupérer le projet */
+
+    const {
+        data: projet,
+        error
+    } = await supabaseClient
+        .from("projets")
+        .select("*")
+        .eq("id", id)
+        .eq("user_id", user.id)
+        .single();
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Impossible de récupérer ce projet."
+        );
+
+        return;
+    }
+
+
+    /* Nouveau nom */
+
+    const nouveauNom =
+        prompt(
+            "Nom du projet :",
+            projet.nom || ""
+        );
+
+
+    if (nouveauNom === null) {
+        return;
+    }
+
+
+    if (!nouveauNom.trim()) {
+
+        alert(
+            "⚠️ Le nom du projet ne peut pas être vide."
+        );
+
+        return;
+    }
+
+
+    /* Nouvelle description */
+
+    const nouvelleDescription =
+        prompt(
+            "Description du projet :",
+            projet.description || ""
+        );
+
+
+    if (nouvelleDescription === null) {
+        return;
+    }
+
+
+    /* Mise à jour */
+
+    const {
+        error: updateError
+    } = await supabaseClient
+        .from("projets")
+        .update({
+            nom: nouveauNom.trim(),
+            description: nouvelleDescription.trim()
+        })
+        .eq("id", id)
+        .eq("user_id", user.id);
+
+
+    if (updateError) {
+
+        console.error(updateError);
+
+        alert(
+            "❌ Impossible de modifier le projet."
+        );
+
+        return;
+    }
+
+
+    alert(
+        "✅ Projet modifié avec succès !"
+    );
+
+
+    /* Actualiser la liste */
+
+    chargerProjets();
+
+}
+
+
+
+/* =========================
+   SUPPRIMER UN PROJET
+========================= */
+
+async function supprimerProjet(id) {
+
+    const confirmation =
+        confirm(
+            "⚠️ Voulez-vous vraiment supprimer ce projet ?\n\nCette action est irréversible."
+        );
+
+
+    if (!confirmation) {
+        return;
+    }
+
+
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+
+    if (userError || !user) {
+
+        window.location.href =
+            "connexion.html";
+
+        return;
+    }
+
+
+    /* Suppression */
+
+    const {
+        error
+    } = await supabaseClient
+        .from("projets")
+        .delete()
+        .eq("id", id)
+        .eq("user_id", user.id);
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Impossible de supprimer le projet."
+        );
+
+        return;
+    }
+
+
+    alert(
+        "✅ Projet supprimé avec succès !"
+    );
+
+
+    /* Actualiser la liste */
+
+    chargerProjets();
+
+}
+    chargerProjets();
+  </script>
+
+</body>
+
+</html>

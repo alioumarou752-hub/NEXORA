@@ -1,362 +1,973 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NEXORA — Tableau de bord</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <title>Tableau de bord — NEXORA</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #172033;
-        }
+    <link rel="stylesheet" href="style.css">
 
-        header {
-            background: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .logout {
-            border: none;
-            background: #172033;
-            color: white;
-            padding: 10px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        main {
-            max-width: 1100px;
-            margin: auto;
-            padding: 30px 20px;
-        }
-
-        .welcome {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-        }
-
-        .welcome h1 {
-            margin-bottom: 10px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            border: 1px solid #e5e7eb;
-        }
-
-        .card h2 {
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: #667085;
-        }
-    </style>
 </head>
+
 
 <body>
 
-<header>
-    <div class="logo">NEXORA</div>
 
-    <button class="logout" id="logoutButton">
-        Se déconnecter
-    </button>
+<!-- =========================
+     EN-TÊTE
+========================= -->
+
+<header class="dashboard-header">
+
+    <div class="container header-content">
+
+        <div class="dashboard-brand">
+
+            <div class="logo">
+                NEXORA
+            </div>
+
+            <span>
+                Votre espace personnel
+            </span>
+
+        </div>
+
+
+        <button
+            id="deconnexionBtn"
+            class="btn btn-danger"
+        >
+            Déconnexion
+        </button>
+
+    </div>
+
 </header>
+
+
+
+<!-- =========================
+     CONTENU PRINCIPAL
+========================= -->
 
 <main>
 
-    <section class="welcome">
-        <h1 id="welcomeMessage">Bienvenue sur NEXORA 👋</h1>
-<p id="userEmail">Chargement de votre compte...</p>
-    </section>
+<section class="dashboard">
 
-    <section class="cards">
+<div class="container">
 
-<div class="card">
-    <h2>🚀 Mes projets</h2>
-    <p>Gérez et développez vos projets.</p>
-<div id="projectsList">
-    Chargement des projets...
-</div>
-    <button class="projectButton" id="createProjectButton">
-        + Créer un projet
-    </button>
 
-    <div id="projectMessage"></div>
-</div>
+    <!-- =========================
+         BIENVENUE
+    ========================= -->
 
-      <div class="card">
+    <div class="welcome-card">
 
-    <h2>🛠️ Services</h2>
+        <div class="welcome-content">
+
+            <span class="welcome-badge">
+                ✨ Espace personnel
+            </span>
+
+            <h1 id="welcomeTitle">
+                Bienvenue sur NEXORA 👋
+            </h1>
+
+            <p>
+                Gérez vos projets, découvrez nos services
+                et développez vos idées avec NEXORA.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         TITRE DU TABLEAU
+    ========================= -->
+
+    <div class="dashboard-title">
+
+        <div>
+
+            <span class="section-label">
+                TABLEAU DE BORD
+            </span>
+
+            <h2>
+                Votre activité
+            </h2>
+
+            <p>
+                Retrouvez ici vos demandes et les outils
+                disponibles sur NEXORA.
+            </p>
+
+        </div>
+
+
+        <button
+            id="actualiserBtn"
+            class="btn btn-primary"
+        >
+            ↻ Actualiser
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         STATISTIQUES
+    ========================= -->
+
+    <div class="stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📋
+            </div>
+
+            <div>
+
+                <strong id="totalDemandes">
+                    0
+                </strong>
+
+                <p>
+                    Total des demandes
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⏳
+            </div>
+
+            <div>
+
+                <strong id="demandesAttente">
+                    0
+                </strong>
+
+                <p>
+                    En attente
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ✅
+            </div>
+
+            <div>
+
+                <strong id="demandesTerminees">
+                    0
+                </strong>
+
+                <p>
+                    Terminées
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         FONCTIONNALITÉS NEXORA
+    ========================= -->
+
+    <section class="features dashboard-features">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    NEXORA
+                </span>
+
+                <h2>
+                    Découvrez nos outils
+                </h2>
+
+                <p>
+                    Tout ce dont vous avez besoin pour
+                    développer vos idées et vos projets.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="cards">
+
+
+            <!-- NEXORA AI -->
+
+            <div class="card dashboard-card">
+
+                <div class="card-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    Nexora AI
+                </h3>
+
+                <p>
+                    Un assistant intelligent pour vous
+                    accompagner dans vos idées et vos projets.
+                </p>
+
+                <span class="coming-soon">
+                    Bientôt disponible
+                </span>
+
+            </div>
+
+
+
+            <!-- ANALYSE -->
+
+            <div class="card dashboard-card">
+
+                <div class="card-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Analyse
+                </h3>
+
+                <p>
+                    Analysez votre activité et découvrez
+                    de nouvelles opportunités.
+                </p>
+
+                <span class="coming-soon">
+                    Bientôt disponible
+                </span>
+
+            </div>
+
+
+<!-- PROJETS -->
+
+<a href="projets.html" class="card" style="text-decoration: none; color: inherit; display: block;">
+
+    <div class="icon">🚀</div>
+
+    <h3>Projets</h3>
 
     <p>
-        Découvrez les services disponibles sur NEXORA.
+        Transformez vos idées en projets
+        concrets et structurés.
     </p>
 
-    <button
-        class="projectButton"
-        id="servicesButton"
-    >
-        Découvrir les services
-    </button>
+    <span class="btn btn-primary service-button">
+        Mes projets →
+    </span>
 
-    <div id="servicesMessage"></div>
-
-      </div>
+</a>
 
 
-        <div class="card">
-            <h2>💼 Entrepreneuriat</h2>
-            <p>Développez vos idées et vos activités.</p>
-        </div>
+            <!-- SERVICES -->
 
-        <div class="card">
-            <h2>⚙️ Mon compte</h2>
-            <p>Gérez les informations de votre compte.</p>
+            <div class="card dashboard-card">
+
+                <div class="card-icon">
+                    🛠️
+                </div>
+
+                <h3>
+                    Services
+                </h3>
+
+                <p>
+                    Découvrez les services proposés
+                    par NEXORA.
+                </p>
+
+                <a
+                    href="service.html"
+                    class="card-link"
+                >
+                    Voir les services →
+                </a>
+
+            </div>
+
+
+
+            <!-- MON COMPTE -->
+
+            <div class="card dashboard-card">
+
+                <div class="card-icon">
+                    👤
+                </div>
+
+                <h3>
+                    Mon compte
+                </h3>
+
+                <p>
+                    Gérez les informations de votre compte
+                    et vos données personnelles.
+                </p>
+
+                <a
+                    href="compte.html"
+                    class="card-link"
+                >
+                    Gérer mon compte →
+                </a>
+
+            </div>
+
+
         </div>
 
     </section>
+
+
+
+    <!-- =========================
+         ACTIONS RAPIDES
+    ========================= -->
+
+    <section class="quick-actions">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    ACTIONS RAPIDES
+                </span>
+
+                <h2>
+                    Que souhaitez-vous faire ?
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard-actions">
+
+
+            <!-- DEMANDER SERVICE -->
+
+            <a
+                href="service.html"
+                class="action-card"
+            >
+
+                <div class="action-icon">
+                    🚀
+                </div>
+
+                <div class="action-content">
+
+                    <h3>
+                        Demander un service
+                    </h3>
+
+                    <p>
+                        Découvrez les services proposés
+                        par NEXORA et envoyez votre demande.
+                    </p>
+
+                </div>
+
+                <span class="action-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- DÉVELOPPER UNE IDÉE -->
+
+            <div
+                class="action-card"
+                id="ideeCard"
+            >
+
+                <div class="action-icon">
+                    💡
+                </div>
+
+                <div class="action-content">
+
+                    <h3>
+                        Développez votre idée
+                    </h3>
+
+                    <p>
+                        Transformez votre idée en véritable
+                        projet avec NEXORA.
+                    </p>
+
+                </div>
+
+                <span class="action-arrow">
+                    →
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         MES DEMANDES
+    ========================= -->
+
+    <section class="requests-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    VOTRE ACTIVITÉ
+                </span>
+
+                <h2>
+                    Mes demandes
+                </h2>
+
+                <p>
+                    Retrouvez l'historique de vos demandes
+                    de services.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="demandesContainer"
+            class="requests-container"
+        >
+
+            <div class="loading">
+                Chargement de vos demandes...
+            </div>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+</section>
 
 </main>
 
+
+
+<!-- =========================
+     PIED DE PAGE
+========================= -->
+
+<footer>
+
+    <div class="container">
+
+        <p>
+            © 2026 NEXORA — Développez vos idées.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
 const SUPABASE_URL =
 "https://klvgazjmrxflcrfzauao.supabase.co";
 
+
 const SUPABASE_KEY =
 "sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
 
 const supabaseClient =
 window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
-async function afficherProjets() {
 
-    const { data: { user } } =
-        await supabaseClient.auth.getUser();
+
+
+/* =========================
+   CHARGER L'UTILISATEUR
+========================= */
+
+async function chargerUtilisateur() {
+
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+
+        window.location.href =
+            "connexion.html";
+
+        return null;
+    }
+
+
+    const prenom =
+        user.user_metadata?.prenom || "";
+
+
+    const nom =
+        user.user_metadata?.nom || "";
+
+
+    const nomComplet =
+        `${prenom} ${nom}`.trim();
+
+
+    const welcomeTitle =
+        document.getElementById("welcomeTitle");
+
+
+    if (nomComplet) {
+
+        welcomeTitle.textContent =
+            `Bienvenue, ${nomComplet} 👋`;
+
+    } else {
+
+        welcomeTitle.textContent =
+            "Bienvenue sur NEXORA 👋";
+
+    }
+
+
+    return user;
+
+}
+
+
+
+/* =========================
+   CHARGER LES DEMANDES
+========================= */
+
+async function chargerDemandes() {
+
+    const container =
+        document.getElementById(
+            "demandesContainer"
+        );
+
+
+    container.innerHTML =
+        '<div class="loading">Chargement de vos demandes...</div>';
+
+
+    const user =
+        await chargerUtilisateur();
+
 
     if (!user) {
         return;
     }
 
-    const { data: projets, error } =
-        await supabaseClient
-        .from("projets")
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("demande_services")
         .select("*")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: false });
+        .eq("client_id", user.id)
+        .order("created_at", {
+            ascending: false
+        });
 
-    const projectsList =
-        document.getElementById("projectsList");
 
     if (error) {
-        projectsList.textContent =
-            "Erreur lors du chargement des projets.";
+
+        console.error(error);
+
+
+        container.innerHTML = `
+
+            <div class="error">
+
+                Impossible de charger vos demandes.
+
+                <br><br>
+
+                <button
+                    class="btn btn-primary"
+                    onclick="chargerDemandes()"
+                >
+                    Réessayer
+                </button>
+
+            </div>
+
+        `;
+
         return;
     }
 
-    if (!projets || projets.length === 0) {
-        projectsList.textContent =
-            "Aucun projet pour le moment.";
+
+    afficherDemandes(data || []);
+
+}
+
+
+
+/* =========================
+   AFFICHER LES DEMANDES
+========================= */
+
+function afficherDemandes(demandes) {
+
+    const container =
+        document.getElementById(
+            "demandesContainer"
+        );
+
+
+    /* TOTAL */
+
+    document.getElementById(
+        "totalDemandes"
+    ).textContent =
+        demandes.length;
+
+
+
+    /* EN ATTENTE */
+
+    const attente =
+        demandes.filter(
+            demande =>
+                demande.statut ===
+                "en attente"
+        ).length;
+
+
+    document.getElementById(
+        "demandesAttente"
+    ).textContent =
+        attente;
+
+
+
+    /* TERMINÉES */
+
+    const terminees =
+        demandes.filter(
+            demande =>
+                demande.statut ===
+                "terminée" ||
+
+                demande.statut ===
+                "terminee"
+        ).length;
+
+
+    document.getElementById(
+        "demandesTerminees"
+    ).textContent =
+        terminees;
+
+
+
+    /* AUCUNE DEMANDE */
+
+    if (demandes.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    📭
+                </div>
+
+                <h3>
+                    Aucune demande pour le moment
+                </h3>
+
+                <p>
+                    Vous n'avez pas encore demandé
+                    de service à NEXORA.
+                </p>
+
+                <a
+                    href="service.html"
+                    class="btn btn-primary"
+                >
+                    Découvrir nos services
+                </a>
+
+            </div>
+
+        `;
+
         return;
     }
 
-    projectsList.innerHTML = "";
 
-    projets.forEach(function(projet) {
 
-    const projetElement = document.createElement("div");
+    /* AFFICHAGE */
 
-    projetElement.innerHTML = `
-        <h3>${projet.nom}</h3>
-        <p>${projet.description || ""}</p>
-        <button
-    class="editProjectButton"
->
-    ✏️ Modifier
-</button>
-        <button class="deleteProjectButton">
-            🗑️ Supprimer
-        </button>
-    `;
-projetElement
-    .querySelector(".editProjectButton")
-    .addEventListener("click", async function() {
+    container.innerHTML = "";
 
-        const nouveauNom =
-            prompt(
-                "Nouveau nom du projet :",
-                projet.nom
+
+    demandes.forEach(
+        demande => {
+
+            const carte =
+                document.createElement(
+                    "div"
+                );
+
+
+            carte.className =
+                "request-card";
+
+
+            let statutClass =
+                "pending";
+
+
+            let statutTexte =
+                demande.statut ||
+                "En attente";
+
+
+
+            /* TERMINÉE */
+
+            if (
+                demande.statut ===
+                    "terminée" ||
+
+                demande.statut ===
+                    "terminee"
+            ) {
+
+                statutClass =
+                    "completed";
+
+                statutTexte =
+                    "Terminée";
+
+            }
+
+
+
+            /* ANNULÉE */
+
+            if (
+                demande.statut ===
+                    "annulée" ||
+
+                demande.statut ===
+                    "annulee"
+            ) {
+
+                statutClass =
+                    "cancelled";
+
+                statutTexte =
+                    "Annulée";
+
+            }
+
+
+
+            /* DATE */
+
+            const date =
+                demande.created_at
+
+                ? new Date(
+                    demande.created_at
+                  ).toLocaleDateString(
+                    "fr-FR"
+                  )
+
+                : "Date inconnue";
+
+
+
+            carte.innerHTML = `
+
+                <div class="request-icon">
+                    🚀
+                </div>
+
+
+                <div class="request-info">
+
+                    <h3>
+                        ${demande.service || "Service"}
+                    </h3>
+
+                    <p>
+                        Demande envoyée le ${date}
+                    </p>
+
+                </div>
+
+
+                <span
+                    class="status ${statutClass}"
+                >
+                    ${statutTexte}
+                </span>
+
+            `;
+
+
+            container.appendChild(
+                carte
             );
 
-        if (!nouveauNom || !nouveauNom.trim()) {
-            return;
         }
+    );
 
-        const nouvelleDescription =
-            prompt(
-                "Nouvelle description :",
-                projet.description || ""
-            );
+}
 
-        const { error } =
+
+
+/* =========================
+   ACTUALISER
+========================= */
+
+document
+    .getElementById(
+        "actualiserBtn"
+    )
+    .addEventListener(
+        "click",
+        chargerDemandes
+    );
+
+
+
+/* =========================
+   DÉCONNEXION
+========================= */
+
+document
+    .getElementById(
+        "deconnexionBtn"
+    )
+    .addEventListener(
+        "click",
+        async function () {
+
             await supabaseClient
-            .from("projets")
-            .update({
-                nom: nouveauNom.trim(),
-                description: nouvelleDescription || ""
-            })
-            .eq("id", projet.id);
+                .auth
+                .signOut();
 
-        if (error) {
-            alert(
-                "Erreur lors de la modification : " +
-                error.message
-            );
-            return;
+
+            window.location.href =
+                "connexion.html";
+
         }
+    );
 
-        afficherProjets();
-    });
-    projetElement
-        .querySelector(".deleteProjectButton")
-        .addEventListener("click", async function() {
 
-            const confirmer = confirm(
-                "Voulez-vous vraiment supprimer ce projet ?"
+
+/* =========================
+   DÉVELOPPER UNE IDÉE
+========================= */
+
+document
+    .getElementById(
+        "ideeCard"
+    )
+    .addEventListener(
+        "click",
+        function () {
+
+            alert(
+                "🚀 Cette fonctionnalité sera bientôt disponible sur NEXORA."
             );
 
-            if (!confirmer) {
-                return;
-            }
+        }
+    );
 
-            const { error } = await supabaseClient
-                .from("projets")
-                .delete()
-                .eq("id", projet.id);
 
-            if (error) {
-                alert("Erreur lors de la suppression.");
-                return;
-            }
 
-            projetElement.remove();
-        });
+/* =========================
+   LANCEMENT
+========================= */
 
-    projectsList.appendChild(projetElement);
-});
-}
+chargerDemandes();
 
-afficherProjets();
-async function verifierConnexion() {
+</script>
 
-    const { data: { user } } =
-        await supabaseClient.auth.getUser();
-
-    if (!user) {
-        window.location.href = "connexion.html";
-        return;
-    }
-
-      const nom = user.user_metadata?.nom || "";
-const prenom = user.user_metadata?.prenom || "";
-
-const nomComplet = (prenom + " " + nom).trim();
-
-document.getElementById("welcomeMessage").textContent =
-    nomComplet
-        ? "Bienvenue, " + nomComplet + " 👋"
-        : "Bienvenue sur NEXORA 👋";
-
-document.getElementById("userEmail").textContent =
-    "Connecté avec : " + user.email;
-document.getElementById("servicesButton")
-.addEventListener("click", function() {
-
-    window.location.href = "service.html";
-
-});
-}
-verifierConnexion();
-
-document.getElementById("logoutButton")
-.addEventListener("click", async function() {
-
-    await supabaseClient.auth.signOut();
-
-    window.location.href = "index.html";
-});
-document.getElementById("createProjectButton")
-.addEventListener("click", async function() {
-
-    const nomProjet = prompt("Nom de votre projet :");
-
-    if (!nomProjet || !nomProjet.trim()) {
-        return;
-    }
-
-    const descriptionProjet = prompt("Description du projet :");
-
-    const { data: { user } } =
-        await supabaseClient.auth.getUser();
-
-    if (!user) {
-        window.location.href = "connexion.html";
-        return;
-    }
-
-    const { error } = await supabaseClient
-        .from("projets")
-        .insert({
-            user_id: user.id,
-            nom: nomProjet.trim(),
-            description: descriptionProjet || ""
-        });
-
-    if (error) {
-        document.getElementById("projectMessage").textContent =
-            "Erreur : " + error.message;
-        return;
-    }
-
-    document.getElementById("projectMessage").textContent =
-     "✅ Projet créé avec succès !";
-});
-  
-  </script>
 
 </body>
-</>
+
+</html>

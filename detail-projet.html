@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Projet — NEXORA</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================
+           PAGE PROJET
+        ========================= */
+
+        .project-detail-page {
+            padding: 45px 0 80px;
+        }
+
+
+        .project-back {
+            margin-bottom: 25px;
+        }
+
+
+        .project-detail-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+        }
+
+
+        .project-detail-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
+            background: rgba(99, 91, 255, 0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+
+        .project-detail-card h1 {
+            margin: 0 0 10px;
+            font-size: 38px;
+            color: var(--text);
+            word-break: break-word;
+        }
+
+
+        .project-created {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+
+        .project-description-box {
+            padding: 22px;
+            border-radius: 16px;
+            background: var(--background);
+            margin-bottom: 35px;
+        }
+
+
+        .project-description-box h2 {
+            margin: 0 0 12px;
+            font-size: 20px;
+        }
+
+
+        .project-description-box p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           PROCHAINES FONCTIONNALITÉS
+        ========================= */
+
+        .project-tools {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 20px;
+        }
+
+
+        .project-tool {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 25px;
+            background: var(--white);
+        }
+
+
+        .project-tool-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+
+        .project-tool h3 {
+            margin: 0 0 8px;
+        }
+
+
+        .project-tool p {
+            color: var(--muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+
+        .coming-soon-detail {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+
+        /* =========================
+           CHARGEMENT / ERREUR
+        ========================= */
+
+        .detail-message {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+
+        .detail-message-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .project-tools {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .project-detail-page {
+                padding: 30px 0 60px;
+            }
+
+
+            .project-detail-card {
+                padding: 22px;
+            }
+
+
+            .project-detail-card h1 {
+                font-size: 30px;
+            }
+
+
+            .project-tools {
+                grid-template-columns: 1fr;
+            }
+
+        }
+/* ================================
+   SECTION OBJECTIFS
+================================ */
+
+.objectifs-section {
+    margin-top: 30px;
+}
+
+.objectifs-header {
+    margin-bottom: 20px;
+}
+
+.objectifs-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #111827;
+}
+
+
+/* FORMULAIRE */
+
+.objectif-form {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    margin-bottom: 25px;
+}
+
+.objectif-form h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 19px;
+    color: #111827;
+}
+
+.objectif-form input,
+.objectif-form textarea,
+.objectif-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    margin-bottom: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: 0.2s;
+}
+
+.objectif-form textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.objectif-form input:focus,
+.objectif-form textarea:focus,
+.objectif-form select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+
+/* BOUTONS DU FORMULAIRE */
+
+.objectif-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+/* LISTE DES OBJECTIFS */
+
+.objectifs-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+
+/* CARTE OBJECTIF */
+
+.objectif-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.objectif-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+}
+
+.objectif-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #111827;
+}
+
+.objectif-card p {
+    margin: 0 0 15px;
+    color: #6b7280;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+
+/* STATUT */
+
+.objectif-statut {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 20px;
+    background: #eef2ff;
+    color: #4f46e5;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+
+/* ACTIONS DE LA CARTE */
+
+.objectif-card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-edit-objectif,
+.btn-delete-objectif {
+    border: none;
+    padding: 9px 13px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-edit-objectif {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.btn-edit-objectif:hover {
+    background: #e0e7ff;
+}
+
+.btn-delete-objectif {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.btn-delete-objectif:hover {
+    background: #fee2e2;
+}
+
+
+/* MESSAGE */
+
+.objectif-message {
+    background: #f9fafb;
+    border: 1px dashed #d1d5db;
+    border-radius: 14px;
+    padding: 25px;
+    text-align: center;
+    color: #6b7280;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+    .objectifs-container {
+        grid-template-columns: 1fr;
+    }
+
+    .objectif-form {
+        padding: 18px;
+    }
+
+    .objectif-card {
+        padding: 17px;
+    }
+
+    .objectif-actions {
+        flex-direction: column;
+    }
+
+    .objectif-actions .btn {
+        width: 100%;
+    }
+
+          }
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     EN-TÊTE
+========================= -->
+
+<header class="dashboard-header">
+
+    <div class="container header-content">
+
+        <div class="dashboard-brand">
+
+            <div class="logo">
+                NEXORA
+            </div>
+
+            <span>
+                Projet
+            </span>
+
+        </div>
+
+
+        <a
+            href="projet.html"
+            class="btn btn-secondary"
+        >
+            ← Mes projets
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     CONTENU
+========================= -->
+
+<main>
+
+<section class="project-detail-page">
+
+<div class="container">
+
+
+    <div id="projectContent">
+
+        <div class="project-detail-card detail-message">
+
+            <div class="detail-message-icon">
+                ⏳
+            </div>
+
+            <h2>
+                Chargement du projet...
+            </h2>
+
+            <p>
+                Nous récupérons les informations du projet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</section>
+
+</main>
+
+
+
+<!-- =========================
+     PIED DE PAGE
+========================= -->
+
+<footer>
+
+    <div class="container">
+
+        <p>
+            © 2026 NEXORA — Développez vos idées.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+    "https://klvgazjmrxflcrfzauao.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+/* =========================
+   CONTENEUR
+========================= */
+
+const projectContent =
+    document.getElementById(
+        "projectContent"
+    );
+let projetActuel = null;
+let utilisateurActuel = null;
+let objectifEnModification = null;
+
+
+/* =========================
+   ÉCHAPPER HTML
+========================= */
+
+function echapperHTML(texte) {
+
+    return String(texte)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+/* =========================
+   CHARGER LE PROJET
+========================= */
+
+async function chargerProjet() {
+
+    /* Utilisateur */
+
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+
+    if (userError || !user) {
+
+        window.location.href =
+            "connexion.html";
+
+        return;
+
+    }
+utilisateurActuel = user;
+
+    /* ID dans l'URL */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const projetId =
+        params.get("id");
+
+
+    if (!projetId) {
+
+        afficherErreur(
+            "Aucun projet n'a été sélectionné."
+        );
+
+        return;
+
+    }
+
+
+    /* Récupérer le projet */
+
+    const {
+        data: projet,
+        error
+    } = await supabaseClient
+        .from("projets")
+        .select("*")
+        .eq("id", projetId)
+        .eq("user_id", user.id)
+        .single();
+
+
+    if (error || !projet) {
+
+        console.error(error);
+
+        afficherErreur(
+            "Projet introuvable ou inaccessible."
+        );
+
+        return;
+
+    }
+
+projetActuel = projet;
+    afficherProjet(projet);
+  chargerObjectifs();
+
+}
+
+
+
+/* =========================
+   AFFICHER LE PROJET
+========================= */
+
+function afficherProjet(projet) {
+
+    const date =
+        projet.created_at
+            ? new Date(
+                projet.created_at
+              ).toLocaleDateString(
+                "fr-FR"
+              )
+            : "Date inconnue";
+
+
+    projectContent.innerHTML = `
+
+        <div class="project-back">
+
+            <a
+                href="projet.html"
+                class="btn btn-secondary"
+            >
+                ← Retour à mes projets
+            </a>
+
+        </div>
+
+
+        <div class="project-detail-card">
+
+            <div class="project-detail-icon">
+                🚀
+            </div>
+
+
+            <h1>
+                ${echapperHTML(
+                    projet.nom ||
+                    "Projet sans nom"
+                )}
+            </h1>
+
+
+            <div class="project-created">
+                Créé le ${date}
+            </div>
+
+
+            <div class="project-description-box">
+
+                <h2>
+                    📝 Description
+                </h2>
+
+                <p>
+                    ${echapperHTML(
+                        projet.description ||
+                        "Aucune description."
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="objectifs-section">
+
+    <div class="objectifs-header">
+
+        <h2>
+            🎯 Objectifs
+        </h2>
+
+    </div>
+
+
+    <div class="objectif-form">
+
+        <h3 id="objectifFormTitre">
+            ➕ Ajouter un objectif
+        </h3>
+
+
+        <input
+            type="text"
+            id="titreObjectif"
+            placeholder="Titre de l'objectif"
+            maxlength="150"
+        >
+
+
+        <textarea
+            id="descriptionObjectif"
+            placeholder="Description de l'objectif"
+        ></textarea>
+
+
+        <select id="statutObjectif">
+
+            <option value="à faire">
+                À faire
+            </option>
+
+            <option value="en cours">
+                En cours
+            </option>
+
+            <option value="terminé">
+                Terminé
+            </option>
+
+        </select>
+
+
+        <div class="objectif-actions">
+
+            <button
+                type="button"
+                class="btn btn-primary"
+                onclick="enregistrerObjectif()"
+            >
+                Ajouter l'objectif
+            </button>
+
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                id="annulerModificationObjectifBtn"
+                onclick="annulerModificationObjectif()"
+                style="display: none;"
+            >
+                Annuler
+            </button>
+
+        </div>
+
+
+        <p id="objectifMessage"></p>
+
+    </div>
+
+
+    <div
+        id="objectifsContainer"
+        class="objectifs-container"
+    >
+
+        <div class="objectif-message">
+            Chargement des objectifs...
+        </div>
+
+    </div>
+
+</div>
+
+                    <h3>
+                        Objectifs
+                    </h3>
+
+                    <p>
+                        Définissez les objectifs
+                        de votre projet.
+                    </p>
+
+                    <span class="coming-soon-detail">
+                        Bientôt disponible
+                    </span>
+
+                </div>
+
+
+                <div class="project-tool">
+
+                    <div class="project-tool-icon">
+                        📋
+                    </div>
+
+                    <h3>
+                        Tâches
+                    </h3>
+
+                    <p>
+                        Organisez les tâches
+                        nécessaires à votre projet.
+                    </p>
+
+                    <span class="coming-soon-detail">
+                        Bientôt disponible
+                    </span>
+
+                </div>
+
+
+                <div class="project-tool">
+
+                    <div class="project-tool-icon">
+                        💡
+                    </div>
+
+                    <h3>
+                        Idées
+                    </h3>
+
+                    <p>
+                        Notez et développez
+                        vos nouvelles idées.
+                    </p>
+
+                    <span class="coming-soon-detail">
+                        Bientôt disponible
+                    </span>
+
+                </div>
+
+
+                <div class="project-tool">
+
+                    <div class="project-tool-icon">
+                        📊
+                    </div>
+
+                    <h3>
+                        Progression
+                    </h3>
+
+                    <p>
+                        Suivez l'évolution
+                        de votre projet.
+                    </p>
+
+                    <span class="coming-soon-detail">
+                        Bientôt disponible
+                    </span>
+
+                </div>
+
+
+                <div class="project-tool">
+
+                    <div class="project-tool-icon">
+                        📅
+                    </div>
+
+                    <h3>
+                        Échéances
+                    </h3>
+
+                    <p>
+                        Organisez les dates
+                        importantes du projet.
+                    </p>
+
+                    <span class="coming-soon-detail">
+                        Bientôt disponible
+                    </span>
+
+                </div>
+
+
+                <div class="project-tool">
+
+                    <div class="project-tool-icon">
+                        🤖
+                    </div>
+
+                    <h3>
+                        NEXORA AI
+                    </h3>
+
+                    <p>
+                        Utilisez l'intelligence artificielle
+                        pour développer votre projet.
+                    </p>
+
+                    <span class="coming-soon-detail">
+                        Bientôt disponible
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   OBJECTIFS
+===================================================== */
+
+async function chargerObjectifs() {
+
+    const objectifsContainer =
+        document.getElementById(
+            "objectifsContainer"
+        )
+
+    if (!objectifsContainer) {
+        return;
+    }
+
+
+    const {
+        data: objectifs,
+        error
+    } = await supabaseClient
+        .from("objectifs")
+        .select("*")
+        .eq(
+            "projet_id",
+            projetActuel.id
+        )
+        .eq(
+            "user_id",
+            utilisateurActuel.id
+        )
+        .order(
+            "created_at",
+            {
+                ascending: false
+            }
+        );
+
+
+    if (error) {
+
+        console.error(error);
+
+        objectifsContainer.innerHTML = `
+            <div class="objectif-message">
+                ❌ Impossible de charger les objectifs.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    if (!objectifs || objectifs.length === 0) {
+
+        objectifsContainer.innerHTML = `
+            <div class="objectif-message">
+                Aucun objectif pour le moment.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    objectifsContainer.innerHTML =
+        objectifs
+            .map(
+                objectif => `
+
+                    <div class="objectif-card">
+
+                        <h3>
+                            ${echapperHTML(
+                                objectif.titre
+                            )}
+                        </h3>
+
+
+                        <p>
+                            ${echapperHTML(
+                                objectif.description ||
+                                ""
+                            )}
+                        </p>
+
+
+                        <span class="objectif-statut">
+                            ${echapperHTML(
+                                objectif.statut
+                            )}
+                        </span>
+
+
+                        <div class="objectif-card-actions">
+
+                            <button
+                                type="button"
+                                class="btn-edit-objectif"
+                                onclick="modifierObjectif('${objectif.id}')"
+                            >
+                                ✏️ Modifier
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="btn-delete-objectif"
+                                onclick="supprimerObjectif('${objectif.id}')"
+                            >
+                                🗑️ Supprimer
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `
+            )
+            .join("");
+
+}
+
+
+/* =========================
+   ENREGISTRER OBJECTIF
+========================= */
+
+async function enregistrerObjectif() {
+
+    const titre =
+        document
+            .getElementById(
+                "titreObjectif"
+            )
+            .value
+            .trim();
+
+
+    const description =
+        document
+            .getElementById(
+                "descriptionObjectif"
+            )
+            .value
+            .trim();
+
+
+    const statut =
+        document
+            .getElementById(
+                "statutObjectif"
+            )
+            .value;
+
+
+    const message =
+        document.getElementById(
+            "objectifMessage"
+        );
+
+
+    if (!titre) {
+
+        message.textContent =
+            "⚠️ Le titre de l'objectif est obligatoire.";
+
+        return;
+
+    }
+
+
+    message.textContent =
+        "Enregistrement...";
+
+
+    if (objectifEnModification) {
+
+        const {
+            error
+        } = await supabaseClient
+            .from("objectifs")
+            .update({
+
+                titre:
+                    titre,
+
+                description:
+                    description,
+
+                statut:
+                    statut
+
+            })
+            .eq(
+                "id",
+                objectifEnModification
+            )
+            .eq(
+                "user_id",
+                utilisateurActuel.id
+            );
+
+
+        if (error) {
+
+            console.error(error);
+
+            message.textContent =
+                "❌ Impossible de modifier l'objectif.";
+
+            return;
+
+        }
+
+
+        annulerModificationObjectif();
+
+        await chargerObjectifs();
+
+        message.textContent =
+            "✅ Objectif modifié.";
+
+        return;
+
+    }
+
+
+    const {
+        error
+    } = await supabaseClient
+        .from("objectifs")
+        .insert({
+
+            projet_id:
+                projetActuel.id,
+
+            user_id:
+                utilisateurActuel.id,
+
+            titre:
+                titre,
+
+            description:
+                description,
+
+            statut:
+                statut
+
+        });
+
+
+    if (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "❌ Impossible de créer l'objectif.";
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "titreObjectif"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "descriptionObjectif"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "statutObjectif"
+        )
+        .value = "à faire";
+
+
+    message.textContent =
+        "✅ Objectif ajouté.";
+
+
+    await chargerObjectifs();
+
+}
+
+
+/* =========================
+   MODIFIER OBJECTIF
+========================= */
+
+async function modifierObjectif(id) {
+
+    const {
+        data: objectif,
+        error
+    } = await supabaseClient
+        .from("objectifs")
+        .select("*")
+        .eq(
+            "id",
+            id
+        )
+        .eq(
+            "user_id",
+            utilisateurActuel.id
+        )
+        .single();
+
+
+    if (error || !objectif) {
+
+        alert(
+            "Impossible de récupérer cet objectif."
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "titreObjectif"
+        )
+        .value =
+        objectif.titre || "";
+
+
+    document
+        .getElementById(
+            "descriptionObjectif"
+        )
+        .value =
+        objectif.description || "";
+
+
+    document
+        .getElementById(
+            "statutObjectif"
+        )
+        .value =
+        objectif.statut || "à faire";
+
+
+    objectifEnModification =
+        id;
+document
+    .getElementById(
+        "objectifFormTitre"
+    )
+    .scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    document
+        .getElementById(
+            "objectifFormTitre"
+        )
+        .textContent =
+        "✏️ Modifier l'objectif";
+
+
+    document
+        .querySelector(
+            ".objectif-actions button"
+        )
+        .textContent =
+        "Enregistrer les modifications";
+
+
+    document
+        .getElementById(
+            "annulerModificationObjectifBtn"
+        )
+        .style.display =
+        "inline-block";
+
+}
+
+
+/* =========================
+   ANNULER MODIFICATION
+========================= */
+
+function annulerModificationObjectif() {
+
+    objectifEnModification =
+        null;
+
+
+    const titre =
+        document.getElementById(
+            "titreObjectif"
+        );
+
+
+    const description =
+        document.getElementById(
+            "descriptionObjectif"
+        );
+
+
+    const statut =
+        document.getElementById(
+            "statutObjectif"
+        );
+
+
+    const bouton =
+        document.querySelector(
+            ".objectif-actions button"
+        );
+
+
+    const annuler =
+        document.getElementById(
+            "annulerModificationObjectifBtn"
+        );
+
+
+    const formTitre =
+        document.getElementById(
+            "objectifFormTitre"
+        );
+
+
+    if (titre) {
+        titre.value = "";
+    }
+
+
+    if (description) {
+        description.value = "";
+    }
+
+
+    if (statut) {
+        statut.value = "à faire";
+    }
+
+
+    if (bouton) {
+
+        bouton.textContent =
+            "Ajouter l'objectif";
+
+    }
+
+
+    if (annuler) {
+
+        annuler.style.display =
+            "none";
+
+    }
+
+
+    if (formTitre) {
+
+        formTitre.textContent =
+            "➕ Ajouter un objectif";
+
+    }
+
+}
+
+
+/* =========================
+   SUPPRIMER OBJECTIF
+========================= */
+
+async function supprimerObjectif(id) {
+
+    const confirmation =
+        confirm(
+            "Voulez-vous vraiment supprimer cet objectif ?"
+        );
+
+
+    if (!confirmation) {
+        return;
+    }
+
+
+    const {
+        error
+    } = await supabaseClient
+        .from("objectifs")
+        .delete()
+        .eq(
+            "id",
+            id
+        )
+        .eq(
+            "user_id",
+            utilisateurActuel.id
+        );
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "Impossible de supprimer l'objectif."
+        );
+
+        return;
+
+    }
+
+
+    await chargerObjectifs();
+
+  }
+/* =========================
+   ERREUR
+========================= */
+
+function afficherErreur(message) {
+
+    projectContent.innerHTML = `
+
+        <div class="project-detail-card detail-message">
+
+            <div class="detail-message-icon">
+                ⚠️
+            </div>
+
+            <h2>
+                ${echapperHTML(message)}
+            </h2>
+
+            <br>
+
+            <a
+                href="projet.html"
+                class="btn btn-primary"
+            >
+                ← Retour à mes projets
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* =========================
+   LANCEMENT
+========================= */
+  
+window.modifierObjectif = modifierObjectif;
+chargerProjet();
+
+</script>
+
+
+</body>
+
+</html>
