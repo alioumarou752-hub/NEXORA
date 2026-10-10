@@ -392,6 +392,241 @@
     }
 
           }
+      /* ================================
+   SECTION TÂCHES
+================================ */
+
+.taches-section {
+    margin-top: 35px;
+}
+
+.taches-header {
+    margin-bottom: 20px;
+}
+
+.taches-header h2 {
+    margin: 0 0 7px;
+    font-size: 24px;
+    color: #111827;
+}
+
+.taches-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* FORMULAIRE */
+
+.tache-form {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    margin-bottom: 25px;
+}
+
+.tache-form h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 19px;
+    color: #111827;
+}
+
+.tache-form input,
+.tache-form textarea,
+.tache-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    margin-bottom: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: 0.2s;
+}
+
+.tache-form textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.tache-form input:focus,
+.tache-form textarea:focus,
+.tache-form select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+
+/* LIGNE STATUT + ÉCHÉANCE */
+
+.tache-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+
+/* ACTIONS */
+
+.tache-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+/* LISTE DES TÂCHES */
+
+.taches-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+
+/* CARTE */
+
+.tache-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tache-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+}
+
+.tache-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #111827;
+}
+
+.tache-card p {
+    margin: 0 0 15px;
+    color: #6b7280;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+
+/* INFORMATIONS */
+
+.tache-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.tache-statut {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 20px;
+    background: #eef2ff;
+    color: #4f46e5;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.tache-echeance {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+
+/* BOUTONS */
+
+.tache-card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-edit-tache,
+.btn-delete-tache {
+    border: none;
+    padding: 9px 13px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-edit-tache {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.btn-edit-tache:hover {
+    background: #e0e7ff;
+}
+
+.btn-delete-tache {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.btn-delete-tache:hover {
+    background: #fee2e2;
+}
+
+
+/* MESSAGE */
+
+.tache-message {
+    background: #f9fafb;
+    border: 1px dashed #d1d5db;
+    border-radius: 14px;
+    padding: 25px;
+    text-align: center;
+    color: #6b7280;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+    .taches-container {
+        grid-template-columns: 1fr;
+    }
+
+    .tache-form {
+        padding: 18px;
+    }
+
+    .tache-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .tache-card {
+        padding: 17px;
+    }
+
+    .tache-actions {
+        flex-direction: column;
+    }
+
+    .tache-actions .btn {
+        width: 100%;
+    }
+
+  }
     </style>
 
 </head>
@@ -531,7 +766,9 @@ const projectContent =
     );
 let projetActuel = null;
 let utilisateurActuel = null;
+
 let objectifEnModification = null;
+let tacheEnModification = null;
 
 
 /* =========================
@@ -624,9 +861,150 @@ utilisateurActuel = user;
     }
 
 projetActuel = projet;
-    afficherProjet(projet);
-  chargerObjectifs();
 
+afficherProjet(projet);
+
+chargerObjectifs();
+
+chargerTaches();
+async function chargerTaches() {
+
+    const tachesContainer =
+        document.getElementById(
+            "tachesContainer"
+        );
+
+    if (!tachesContainer) {
+        return;
+    }
+
+    const {
+        data: taches,
+        error
+    } = await supabaseClient
+        .from("taches")
+        .select("*")
+        .eq(
+            "projet_id",
+            projetActuel.id
+        )
+        .eq(
+            "user_id",
+            utilisateurActuel.id
+        )
+        .order(
+            "created_at",
+            {
+                ascending: false
+            }
+        );
+
+
+    if (error) {
+
+        console.error(error);
+
+        tachesContainer.innerHTML = `
+            <div class="tache-message">
+                ❌ Impossible de charger les tâches.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    if (!taches || taches.length === 0) {
+
+        tachesContainer.innerHTML = `
+            <div class="tache-message">
+                Aucune tâche pour le moment.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    tachesContainer.innerHTML =
+        taches
+            .map(
+                tache => `
+
+                    <div class="tache-card">
+
+                        <h3>
+                            ${echapperHTML(
+                                tache.titre
+                            )}
+                        </h3>
+
+
+                        <p>
+                            ${echapperHTML(
+                                tache.description ||
+                                ""
+                            )}
+                        </p>
+
+
+                        <div class="tache-info">
+
+                            <span class="tache-statut">
+                                ${echapperHTML(
+                                    tache.statut
+                                )}
+                            </span>
+
+
+                            ${
+                                tache.echeance
+                                ?
+                                `
+                                <span class="tache-echeance">
+                                    📅 ${echapperHTML(
+                                        tache.echeance
+                                    )}
+                                </span>
+                                `
+                                :
+                                `
+                                <span class="tache-echeance">
+                                    📅 Aucune échéance
+                                </span>
+                                `
+                            }
+
+                        </div>
+
+
+                        <div class="tache-card-actions">
+
+                            <button
+                                type="button"
+                                class="btn-edit-tache"
+                                onclick="modifierTache('${tache.id}')"
+                            >
+                                ✏️ Modifier
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="btn-delete-tache"
+                                onclick="supprimerTache('${tache.id}')"
+                            >
+                                🗑️ Supprimer
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `
+            )
+            .join("");
+}
 }
 
 
@@ -698,6 +1076,114 @@ function afficherProjet(projet) {
 
 
             <div class="objectifs-section">
+            <!-- ================================
+     SECTION TÂCHES
+================================ -->
+
+<div class="taches-section">
+
+    <div class="taches-header">
+
+        <h2>
+            📋 Tâches
+        </h2>
+
+        <p>
+            Organisez les actions nécessaires pour réaliser votre projet.
+        </p>
+
+    </div>
+
+
+    <div class="tache-form">
+
+        <h3 id="tacheFormTitre">
+            ➕ Ajouter une tâche
+        </h3>
+
+
+        <input
+            type="text"
+            id="titreTache"
+            placeholder="Titre de la tâche"
+            maxlength="150"
+        >
+
+
+        <textarea
+            id="descriptionTache"
+            placeholder="Description de la tâche"
+        ></textarea>
+
+
+        <div class="tache-form-row">
+
+            <select id="statutTache">
+
+                <option value="à faire">
+                    À faire
+                </option>
+
+                <option value="en cours">
+                    En cours
+                </option>
+
+                <option value="terminée">
+                    Terminée
+                </option>
+
+            </select>
+
+
+            <input
+                type="date"
+                id="echeanceTache"
+            >
+
+        </div>
+
+
+        <div class="tache-actions">
+
+            <button
+                type="button"
+                class="btn btn-primary"
+                onclick="enregistrerTache()"
+            >
+                Ajouter la tâche
+            </button>
+
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                id="annulerModificationTacheBtn"
+                onclick="annulerModificationTache()"
+                style="display: none;"
+            >
+                Annuler
+            </button>
+
+        </div>
+
+
+        <p id="tacheMessage"></p>
+
+    </div>
+
+
+    <div
+        id="tachesContainer"
+        class="taches-container"
+    >
+
+        <div class="tache-message">
+            Chargement des tâches...
+        </div>
+
+    </div>
+
+</div>
 
     <div class="objectifs-header">
 
