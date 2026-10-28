@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#635BFF">
+
+<title>Aperçu du site — NEXORA</title>
+
+<style>
+:root {
+    --primary: #635BFF;
+    --secondary: #5148E8;
+    --background: #FFFFFF;
+    --text: #172033;
+    --muted: #667085;
+    --border: #E8EAF0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Inter, Arial, sans-serif;
+    background: #F7F8FC;
+    color: var(--text);
+}
+
+button, input, textarea {
+    font: inherit;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.preview-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #172033;
+    color: white;
+    padding: 12px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.toolbar-brand {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.toolbar-button {
+    padding: 10px 13px;
+    border-radius: 9px;
+    border: 1px solid #FFFFFF30;
+    background: #FFFFFF10;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.toolbar-button:hover {
+    background: #FFFFFF20;
+}
+
+.toolbar-button:active {
+    transform: scale(0.97);
+}
+
+.toolbar-button.primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.toolbar-button.primary:hover {
+    opacity: 0.9;
+}
+
+.toolbar-button.primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.preview-info {
+    background: #FFF7E6;
+    color: #8A5A00;
+    padding: 10px 5%;
+    font-size: 13px;    text-align: center;
+    line-height: 1.5;
+}
+
+#loading {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 25px;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.spinner {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 18px;
+    border: 4px solid #E7E5FF;
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+#error {
+    display: none;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 14px;
+    background: #FEF3F2;
+    color: #B42318;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+#website {
+    display: none;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+#website.visible {
+    display: block;
+}
+
+.site-header {
+    padding: 20px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--background);
+}
+
+.site-logo {
+    font-size: 23px;
+    font-weight: 900;
+    color: var(--primary);
+    overflow-wrap: anywhere;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.site-nav button {
+    border: none;
+    background: transparent;
+    color: var(--text);
+    padding: 9px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.site-nav button.active,
+.site-nav button:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.site-main {
+    min-height: 65vh;
+}
+
+.site-hero {
+    padding: 85px 7%;
+    text-align: center;
+    background: linear-gradient(
+        135deg,
+        var(--background),
+        color-mix(in srgb, var(--primary) 9%, white)
+    );
+}
+
+.site-hero h1 {
+    font-size: clamp(32px, 6vw, 58px);
+    line-height: 1.15;
+    max-width: 900px;
+    margin: 0 auto 22px;
+    overflow-wrap: anywhere;
+}
+
+.site-hero p {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 17px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.hero-actions {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.site-button {
+    display: inline-block;
+    padding: 14px 22px;
+    border: 1px solid var(--primary);
+    border-radius: 11px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.site-button.secondary {
+    background: transparent;
+    color: var(--primary);
+}
+
+.site-sections {
+    max-width: 1150px;
+    margin: auto;
+    padding: 30px 6% 70px;
+}
+
+.site-section {
+    padding: 35px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.site-section:last-child {
+    border-bottom: none;
+}
+
+.site-section h2 {
+    font-size: clamp(23px, 4vw, 34px);
+    line-height: 1.3;
+    margin-bottom: 18px;
+    overflow-wrap: anywhere;
+}
+
+.section-content {
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--muted);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.section-content p {
+    margin-bottom: 12px;
+}
+
+.section-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 14px;
+    margin-top: 15px;
+}
+
+.site-footer {
+    background: #172033;
+    color: white;
+    padding: 30px 6%;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.site-footer p {
+    opacity: .8;
+    overflow-wrap: anywhere;
+}
+
+.empty-page {
+    padding: 70px 20px;
+    text-align: center;
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+@media (max-width: 700px) {
+    .preview-toolbar {
+        padding: 11px 4%;
+        flex-wrap: wrap;
+    }
+
+    .toolbar-brand {
+        font-size: 16px;
+    }
+
+    .toolbar-button {
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+
+    .site-header {
+        padding: 18px 5%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .site-nav {
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 5px;
+    }
+
+    .site-nav button {
+        flex-shrink: 0;
+    }
+
+    .site-hero {
+        padding: 60px 6%;
+    }
+
+    .site-hero p {
+        font-size: 15px;
+    }
+
+    .site-sections {
+        padding: 15px 6% 45px;
+    }
+
+    .site-section {
+        padding: 27px 0;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions .site-button {
+        width: 100%;
+        text-align: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="preview-toolbar">
+
+    <div class="toolbar-brand">NEXORA · Aperçu</div>
+
+    <div class="toolbar-actions">
+        <button class="toolbar-button" id="backButton" type="button">
+            ← Éditeur
+        </button>
+
+        <button class="toolbar-button primary" id="reloadButton" type="button">
+            ↻ Actualiser
+        </button>
+    </div>
+
+</div>
+
+<div class="preview-info">
+    Mode aperçu : vos modifications enregistrées apparaissent ici.
+    Ce site n'est pas encore publié sur Internet.
+</div>
+
+<div id="loading">
+    <div class="spinner"></div>
+    <h2>Préparation de votre site...</h2>
+    <p>Chargement des pages et du contenu depuis NEXORA.</p>
+</div>
+
+<div id="error"></div>
+
+<div id="website">
+
+    <header class="site-header">
+        <div class="site-logo" id="siteLogo">NEXORA</div>
+        <nav class="site-nav" id="siteNavigation"></nav>
+    </header>
+
+    <main class="site-main" id="siteMain"></main>
+
+    <footer class="site-footer">
+        <h3 id="footerName"></h3>
+        <p id="footerDescription"></p>
+        <p>Créé avec NEXORA</p>
+    </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+"use strict";
+
+const SUPABASE_URL =
+    "https://klvgazjmrxflcrfzauao.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+const websiteId =
+    new URLSearchParams(location.search).get("id");
+
+let website = null;
+let settings = {};
+let pages = [];
+let sections = [];
+let currentPageId = null;
+
+const loading = document.getElementById("loading");
+const errorBox = document.getElementById("error");
+const websiteElement = document.getElementById("website");
+
+
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+function showError(message) {
+    loading.style.display = "none";
+    websiteElement.classList.remove("visible");
+    errorBox.style.display = "block";
+    errorBox.textContent = message;
+}
+
+
+function appliquerDesign() {
+    const root = document.documentElement;
+
+    root.style.setProperty(
+        "--primary",
+        settings.primary_color || "#635BFF"
+    );
+
+    root.style.setProperty(
+        "--secondary",
+        settings.secondary_color || "#5148E8"
+    );
+
+    root.style.setProperty(
+        "--background",
+        settings.background_color || "#FFFFFF"
+    );
+
+    root.style.setProperty(
+        "--text",
+        settings.text_color || "#172033"
+    );
+
+    const font = settings.font_family || "Inter";
+
+    const allowedFonts = [
+        "Inter",
+        "Arial",
+        "Roboto",
+        "Georgia",
+        "Poppins"
+    ];
+
+    document.body.style.fontFamily =
+        allowedFonts.includes(font) ? font + ", sans-serif" : "Arial, sans-serif";
+}
+
+
+async function chargerSite() {
+    loading.style.display = "block";
+    errorBox.style.display = "none";
+    websiteElement.classList.remove("visible");
+
+    try {
+        if (!websiteId) {
+            throw new Error(
+                "Identifiant manquant. Ouvrez l'aperçu depuis l'éditeur du site."
+            );
+        }
+
+        const {
+            data: authData,
+            error: authError
+        } = await supabaseClient.auth.getUser();
+
+        if (authError) throw authError;
+
+        if (!authData.user) {
+            location.href = "connexion.html";
+            return;
+        }
+
+        const {
+            data: site,
+            error: siteError
+        } = await supabaseClient
+            .from("websites")
+            .select("*")
+            .eq("id", websiteId)
+            .eq("user_id", authData.user.id)
+            .single();
+
+        if (siteError) throw siteError;
+
+        website = site;
+
+        const {
+            data: settingData,
+            error: settingError
+        } = await supabaseClient
+            .from("website_settings")
+            .select("*")
+            .eq("website_id", websiteId)
+            .maybeSingle();
+
+        if (settingError) throw settingError;
+
+        settings = settingData || {};
+
+        const {
+            data: pageData,
+            error: pageError
+        } = await supabaseClient
+            .from("website_pages")
+            .select("*")
+            .eq("website_id", websiteId)
+            .order("page_order", { ascending: true });
+
+        if (pageError) throw pageError;
+
+        pages = pageData || [];
+
+        const {
+            data: sectionData,
+            error: sectionError
+        } = await supabaseClient
+            .from("website_sections")
+            .select("*")
+            .eq("website_id", websiteId)
+            .eq("is_visible", true)
+            .order("section_order", { ascending: true });
+
+        if (sectionError) throw sectionError;
+
+        sections = sectionData || [];
+
+        appliquerDesign();
+
+        document.title =
+            (website.name || "Mon site") + " — Aperçu NEXORA";
+
+        document.getElementById("siteLogo").textContent =
+            website.name || "Mon site";
+
+        document.getElementById("footerName").textContent =
+            website.name || "";
+
+        document.getElementById("footerDescription").textContent =
+            website.description || "";
+
+        afficherNavigation();
+
+        loading.style.display = "none";
+        websiteElement.classList.add("visible");
+
+        if (pages.length) {
+            afficherPage(pages[0].id);
+        } else {
+            document.getElementById("siteMain").innerHTML =
+                '<div class="empty-page">' +
+                '<h2>Aucune page disponible</h2>' +
+                '<p>Ce site ne contient pas encore de page.</p>' +
+                '</div>';
+        }
+
+    } catch (error) {
+        console.error("Erreur aperçu :", error);
+
+        showError(
+            "Impossible de charger l'aperçu : " +
+            (error.message || "Erreur inconnue")
+        );
+    }
+}
+
+
+function afficherNavigation() {
+    const nav = document.getElementById("siteNavigation");
+
+    nav.innerHTML = "";
+
+    pages.forEach((page, index) => {
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.textContent = page.name || "Page " + (index + 1);
+
+        button.addEventListener("click", () => {
+            afficherPage(page.id);
+        });
+
+        nav.appendChild(button);
+    });
+}
+
+
+function convertirContenuEnHTML(content) {
+    if (content === null || content === undefined) {
+        return "";
+    }
+
+    if (typeof content === "string") {
+        return "<p>" + escapeHTML(content) + "</p>";
+    }
+
+    if (Array.isArray(content)) {
+        return content.map(item => {
+            if (typeof item === "string") {
+                return "<p>" + escapeHTML(item) + "</p>";
+            }
+
+            return convertirContenuEnHTML(item);
+        }).join("");
+    }
+
+    if (typeof content !== "object") {
+        return "<p>" + escapeHTML(content) + "</p>";
+    }
+
+    let html = "";
+
+    /*
+     * Affiche uniquement des champs textuels connus.
+     * Le contenu HTML brut n'est jamais exécuté.
+     */
+
+    const textFields = [
+        "description",
+        "text",
+        "texte",
+        "subtitle",
+        "sous_titre",
+        "paragraph",
+        "content",
+        "message"
+    ];
+
+    textFields.forEach(key => {
+        if (
+            typeof content[key] === "string" &&
+            content[key].trim()
+        ) {
+            html += "<p>" +
+                escapeHTML(content[key]) +
+                "</p>";
+        }
+    });
+
+    const listFields = [
+        "items",
+        "services",
+        "features",
+        "points"
+    ];
+
+    listFields.forEach(key => {
+        if (Array.isArray(content[key])) {
+            html += "<ul style='padding-left:22px;margin:15px 0;'>";
+
+            content[key].forEach(item => {
+                const label =
+                    typeof item === "string"
+                        ? item
+                        : item && typeof item === "object"
+                            ? item.title || item.name || item.label || ""
+                            : "";
+
+                if (label) {
+                    html += "<li>" + escapeHTML(label) + "</li>";
+                }
+            });
+
+            html += "</ul>";
+        }
+    });
+
+    if (
+        typeof content.image_url === "string" &&
+        /^https?:\/\//i.test(content.image_url)
+    ) {
+        html += "<img src='" +
+            escapeHTML(content.image_url) +
+            "' alt='' loading='lazy'>";
+    }
+
+    if (
+        typeof content.image === "string" &&
+        /^https?:\/\//i.test(content.image)
+    ) {
+        html += "<img src='" +
+            escapeHTML(content.image) +
+            "' alt='' loading='lazy'>";
+    }
+
+    if (!html) {
+        html = "<p>Le contenu de cette section pourra être personnalisé dans l'éditeur NEXORA.</p>";
+    }
+
+    return html;
+}
+
+function afficherPage(pageId) {
+currentPageId = pageId;
+
+const page = pages.find(item => item.id === pageId);
+if (!page) return;
+
+document.querySelectorAll("#siteNavigation button")
+    .forEach((button, index) => {
+        button.classList.toggle(
+            "active",
+            pages[index] && pages[index].id === pageId
+        );
+    });
+
+const pageSections = sections
+    .filter(section => section.page_id === pageId)
+    .sort((a, b) => a.section_order - b.section_order);
+
+const main = document.getElementById("siteMain");
+
+let heroTitle = website.name || page.name || "Bienvenue";
+let heroDescription =
+    website.description || "Découvrez notre univers.";
+
+if (page.content && typeof page.content === "object") {
+    heroTitle =
+        page.content.title ||
+        page.content.titre ||
+        heroTitle;
+
+    heroDescription =
+        page.content.description ||
+        page.content.subtitle ||
+        heroDescription;
+}
+
+const firstSection = pageSections[0];
+
+if (firstSection && firstSection.title) {
+    heroTitle = firstSection.title;
+}
+
+if (
+    firstSection &&
+    firstSection.content &&
+    typeof firstSection.content === "object"
+) {
+    heroDescription =
+        firstSection.content.description ||
+        firstSection.content.subtitle ||
+        firstSection.content.text ||
+        firstSection.content.texte ||
+        heroDescription;
+}
+
+let html = `
+    <section class="site-hero">
+        <span style="
+            display:inline-block;
+            padding:8px 14px;
+            margin-bottom:20px;
+            border-radius:30px;
+            background:var(--primary);
+            color:white;
+            font-size:12px;
+            font-weight:800;
+            letter-spacing:1px;
+        ">
+            BIENVENUE
+        </span>
+
+        <h1>${escapeHTML(heroTitle)}</h1>
+
+        <p>${escapeHTML(heroDescription)}</p>
+
+        <div class="hero-actions">
+            <a href="#siteSections" class="site-button">
+                Découvrir nos services
+            </a>
+
+            <a href="#siteFooter" class="site-button secondary">
+                Nous contacter
+            </a>
+        </div>
+    </section>
+
+    <div class="site-sections" id="siteSections">
+`;
+
+if (pageSections.length) {
+    pageSections.forEach((section, index) => {
+        const type = String(
+            section.section_type || ""
+        ).toLowerCase();
+
+        const title = section.title || "Découvrez notre contenu";
+
+        const contentHTML =
+            convertirContenuEnHTML(section.content);
+
+        const isCardSection =
+            type.includes("service") ||
+            type.includes("avantage") ||
+            type.includes("feature") ||
+            type.includes("equipe") ||
+            type.includes("team");
+
+        const isGallery =
+            type.includes("galerie") ||
+            type.includes("gallery") ||
+            type.includes("portfolio");
+
+        if (isGallery) {
+            html += `
+                <section class="site-section">
+                    <h2>${escapeHTML(title)}</h2>
+
+                    <div style="
+                        display:grid;
+                        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+                        gap:20px;
+                    ">
+                        ${contentHTML}
+                    </div>
+                </section>
+            `;
+        } else if (isCardSection) {
+            html += `
+                <section class="site-section">
+                    <h2>${escapeHTML(title)}</h2>
+
+                    <div style="
+                        padding:25px;
+                        border:1px solid var(--border);
+                        border-radius:18px;
+                        background:var(--background);
+                        box-shadow:0 8px 28px rgba(23,32,51,0.05);
+                    ">
+                        ${contentHTML}
+                    </div>
+                </section>
+            `;
+        } else {
+            html += `
+                <section class="site-section">
+                    <h2>${escapeHTML(title)}</h2>
+
+                    <div class="section-content">
+                        ${contentHTML}
+                    </div>
+                </section>
+            `;
+        }
+    });
+} else {
+    html += `
+        <section style="
+            padding:35px;
+            text-align:center;
+            border:1px solid var(--border);
+            border-radius:18px;
+            background:var(--background);
+        ">
+            <h2>Votre site commence ici</h2>
+
+            <p style="
+                margin-top:12px;
+                color:var(--muted);
+                line-height:1.8;
+            ">
+                Personnalisez vos sections dans l'éditeur NEXORA
+                pour présenter vos services, vos photos et votre activité.
+            </p>
+        </section>
+    `;
+}
+
+html += "</div>";
+
+main.innerHTML = html;
+
+}
+    location.href =
+        "editeur-site.html?id=" + encodeURIComponent(websiteId);
+
+document.getElementById("reloadButton").addEventListener("click", () => {
+    chargerSite();
+});
+
+chargerSite();
+
+</script>
+
+</body>
+</html>
