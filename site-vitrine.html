@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Site vitrine — NEXORA</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =========================
+           NEXORA — SITE VITRINE
+        ========================= */
+
+        .site-vitrine-page {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(99, 91, 255, .10), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(81, 72, 232, .08), transparent 30%),
+                #f7f8fc;
+        }
+
+        /* HEADER */
+
+        .sv-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(232,234,240,.9);
+        }
+
+        .sv-header-inner {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .sv-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sv-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #635bff,
+                #5148e8
+            );
+
+            color: white;
+            font-weight: 800;
+            font-size: 17px;
+
+            box-shadow: 0 8px 24px rgba(99,91,255,.25);
+        }
+
+        .sv-brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sv-brand-name {
+            font-size: 17px;
+            font-weight: 800;
+            color: #172033;
+        }
+
+        .sv-brand-subtitle {
+            font-size: 12px;
+            color: #667085;
+        }
+
+        .sv-back {
+            text-decoration: none;
+            color: #667085;
+            font-size: 14px;
+            font-weight: 600;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 10px 14px;
+            border-radius: 10px;
+
+            transition: .2s ease;
+        }
+
+        .sv-back:hover {
+            background: #f1f2f7;
+            color: #172033;
+        }
+
+        /* MAIN */
+
+        .sv-main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 24px 80px;
+        }
+
+        .sv-hero {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto 55px;
+        }
+
+        .sv-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 8px 14px;
+            border-radius: 999px;
+
+            background: rgba(99,91,255,.09);
+            color: #5148e8;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            margin-bottom: 20px;
+        }
+
+        .sv-hero h1 {
+            margin: 0 0 18px;
+
+            font-size: clamp(38px, 6vw, 68px);
+            line-height: 1.02;
+            letter-spacing: -2px;
+
+            color: #172033;
+        }
+
+        .sv-hero h1 span {
+            background: linear-gradient(
+                135deg,
+                #635bff,
+                #5148e8
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .sv-hero p {
+            margin: 0 auto;
+
+            max-width: 720px;
+
+            color: #667085;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* ACTIONS */
+
+        .sv-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+
+            margin-top: 45px;
+        }
+
+        .sv-action-card {
+            position: relative;
+            overflow: hidden;
+
+            text-decoration: none;
+
+            background: rgba(255,255,255,.92);
+            border: 1px solid #e8eaf0;
+
+            border-radius: 24px;
+            padding: 30px;
+
+            min-height: 250px;
+
+            display: flex;
+            flex-direction: column;
+
+            box-shadow: 0 14px 40px rgba(23,32,51,.06);
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                border-color .25s ease;
+        }
+
+        .sv-action-card::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 4px;
+
+            background: linear-gradient(
+                90deg,
+                #635bff,
+                #5148e8
+            );
+
+            transform: scaleX(0);
+            transform-origin: left;
+
+            transition: transform .25s ease;
+        }
+
+        .sv-action-card:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(99,91,255,.25);
+
+            box-shadow:
+                0 24px 55px rgba(23,32,51,.12);
+        }
+
+        .sv-action-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .sv-icon {
+            width: 62px;
+            height: 62px;
+
+            border-radius: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+
+            background: #f1f2ff;
+
+            margin-bottom: 24px;
+        }
+
+        .sv-action-card h2 {
+            margin: 0 0 10px;
+
+            color: #172033;
+            font-size: 21px;
+        }
+
+        .sv-action-card p {
+            margin: 0;
+
+            color: #667085;
+            line-height: 1.6;
+
+            font-size: 14px;
+        }
+
+        .sv-action-link {
+            margin-top: auto;
+            padding-top: 24px;
+
+            color: #5148e8;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        /* FEATURE SECTION */
+
+        .sv-section {
+            margin-top: 75px;
+        }
+
+        .sv-section-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sv-section-heading span {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+
+            color: #635bff;
+        }
+
+        .sv-section-heading h2 {
+            margin: 9px 0 10px;
+
+            font-size: 30px;
+            color: #172033;
+        }
+
+        .sv-section-heading p {
+            margin: 0;
+            color: #667085;
+        }
+
+        .sv-process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .sv-process-card {
+            background: white;
+            border: 1px solid #e8eaf0;
+
+            border-radius: 18px;
+            padding: 22px;
+
+            text-align: center;
+        }
+
+        .sv-process-number {
+            width: 38px;
+            height: 38px;
+
+            margin: 0 auto 14px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #f1f2ff;
+            color: #5148e8;
+
+            font-weight: 800;
+        }
+
+        .sv-process-card h3 {
+            margin: 0 0 7px;
+
+            font-size: 15px;
+            color: #172033;
+        }
+
+        .sv-process-card p {
+            margin: 0;
+
+            font-size: 13px;
+            line-height: 1.5;
+
+            color: #667085;
+        }
+
+        /* FOOTER */
+
+        .sv-footer {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 25px 24px 35px;
+
+            text-align: center;
+
+            color: #98a2b3;
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+
+            .sv-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .sv-action-card {
+                min-height: 220px;
+            }
+
+            .sv-process {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .sv-header-inner {
+                padding: 14px 16px;
+            }
+
+            .sv-main {
+                padding: 42px 16px 60px;
+            }
+
+            .sv-hero {
+                margin-bottom: 35px;
+            }
+
+            .sv-hero h1 {
+                letter-spacing: -1.5px;
+            }
+
+            .sv-hero p {
+                font-size: 15px;
+            }
+
+            .sv-action-card {
+                padding: 24px;
+                border-radius: 20px;
+            }
+
+            .sv-process {
+                grid-template-columns: 1fr;
+            }
+
+            .sv-brand-subtitle {
+                display: none;
+            }
+
+            .sv-back {
+                padding: 8px;
+            }
+
+            .sv-back span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="site-vitrine-page">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="sv-header">
+
+        <div class="sv-header-inner">
+
+            <div class="sv-brand">
+
+                <div class="sv-logo">
+                    N
+                </div>
+
+                <div class="sv-brand-text">
+
+                    <div class="sv-brand-name">
+                        NEXORA
+                    </div>
+
+                    <div class="sv-brand-subtitle">
+                        Création de site web
+                    </div>
+
+                </div>
+
+            </div>
+
+            <a href="service.html?service=Site%20web" class="sv-back">
+                ← <span>Retour aux solutions</span>
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="sv-main">
+
+        <!-- HERO -->
+
+        <section class="sv-hero">
+
+            <div class="sv-badge">
+                ✦ NEXORA WEB STUDIO
+            </div>
+
+            <h1>
+                Créez votre
+                <span>site vitrine</span>
+                avec NEXORA.
+            </h1>
+
+            <p>
+                Décrivez votre activité et laissez NEXORA concevoir
+                l'architecture, le design, le contenu et l'expérience
+                de votre site. Vous gardez le contrôle à chaque étape.
+            </p>
+
+        </section>
+
+
+        <!-- ACTIONS -->
+
+        <section class="sv-actions">
+
+            <!-- CREER AVEC IA -->
+
+            <a href="creer-site.html" class="sv-action-card">
+
+                <div class="sv-icon">
+                    ✨
+                </div>
+
+                <h2>
+                    Créer avec l'IA
+                </h2>
+
+                <p>
+                    Décrivez le site que vous imaginez.
+                    NEXORA analyse votre besoin et construit
+                    automatiquement une base professionnelle.
+                </p>
+
+                <div class="sv-action-link">
+                    Commencer la création →
+                </div>
+
+            </a>
+
+
+            <!-- MES SITES -->
+
+            <a href="mes-sites.html" class="sv-action-card">
+
+                <div class="sv-icon">
+                    📁
+                </div>
+
+                <h2>
+                    Mes sites
+                </h2>
+
+                <p>
+                    Retrouvez tous vos sites créés avec NEXORA,
+                    consultez leur état, modifiez-les ou poursuivez
+                    leur création.
+                </p>
+
+                <div class="sv-action-link">
+                    Voir mes sites →
+                </div>
+
+            </a>
+
+
+            <!-- MEDIA -->
+
+            <a href="gestion-medias.html" class="sv-action-card">
+
+                <div class="sv-icon">
+                    🖼️
+                </div>
+
+                <h2>
+                    Gestion des médias
+                </h2>
+
+                <p>
+                    Ajoutez vos photos, organisez-les et choisissez
+                    où elles doivent apparaître dans votre site.
+                </p>
+
+                <div class="sv-action-link">
+                    Gérer mes médias →
+                </div>
+
+            </a>
+
+        </section>
+
+
+        <!-- PROCESS -->
+
+        <section class="sv-section">
+
+            <div class="sv-section-heading">
+
+                <span>
+                    COMMENT ÇA MARCHE
+                </span>
+
+                <h2>
+                    De votre idée à votre site
+                </h2>
+
+                <p>
+                    NEXORA vous accompagne de la conception à la publication.
+                </p>
+
+            </div>
+
+
+            <div class="sv-process">
+
+                <div class="sv-process-card">
+
+                    <div class="sv-process-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Décrivez
+                    </h3>
+
+                    <p>
+                        Expliquez votre activité et le site
+                        que vous souhaitez.
+                    </p>
+
+                </div>
+
+
+                <div class="sv-process-card">
+
+                    <div class="sv-process-number">
+                        02
+                    </div>
+
+                    <h3>
+                        NEXORA analyse
+                    </h3>
+
+                    <p>
+                        L'IA comprend votre besoin et propose
+                        une architecture adaptée.
+                    </p>
+
+                </div>
+
+
+                <div class="sv-process-card">
+
+                    <div class="sv-process-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Personnalisez
+                    </h3>
+
+                    <p>
+                        Modifiez le design, les textes,
+                        les images et les sections.
+                    </p>
+
+                </div>
+
+
+                <div class="sv-process-card">
+
+                    <div class="sv-process-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Publiez
+                    </h3>
+
+                    <p>
+                        Publiez votre site et obtenez
+                        votre lien public.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="sv-footer">
+        © 2026 NEXORA — Transformez vos idées. Développez votre activité.
+    </footer>
+
+</div>
+
+
+<!-- =========================
+     SUPABASE
+========================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+    "https://klvgazjmrxflcrfzauao.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================
+   VERIFICATION UTILISATEUR
+========================= */
+
+async function verifierUtilisateur() {
+
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+
+        window.location.href = "connexion.html";
+
+        return;
+    }
+
+}
+
+verifierUtilisateur();
+
+</script>
+
+</body>
+</html>
