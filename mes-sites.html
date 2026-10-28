@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Mes sites — NEXORA</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #635bff;
+            --primary-dark: #5148e8;
+            --text: #172033;
+            --muted: #667085;
+            --border: #e8eaf0;
+            --background: #f7f8fc;
+            --white: #ffffff;
+            --success: #12b76a;
+            --warning: #f79009;
+            --danger: #f04438;
+        }
+
+        body {
+            font-family: Inter, Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+
+        /* =====================================
+           HEADER
+        ===================================== */
+
+        header {
+            height: 72px;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            text-decoration: none;
+            font-size: 25px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+
+        /* =====================================
+           MAIN
+        ===================================== */
+
+        main {
+            width: min(1200px, 92%);
+            margin: auto;
+            padding: 55px 0 80px;
+        }
+
+
+        /* =====================================
+           HERO
+        ===================================== */
+
+        .page-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 650px;
+        }
+
+        .create-button {
+            border: none;
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                var(--primary-dark)
+            );
+            color: white;
+            padding: 14px 22px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 10px 25px rgba(99, 91, 255, 0.20);
+            transition: 0.2s;
+        }
+
+        .create-button:hover {
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================
+           SEARCH
+        ===================================== */
+
+        .toolbar {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 28px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .search-box {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-box span {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+        }
+
+        #searchInput {
+            width: 100%;
+            height: 50px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            outline: none;
+            padding: 0 16px 0 46px;
+            font-size: 15px;
+            color: var(--text);
+            background: #fff;
+        }
+
+        #searchInput:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99, 91, 255, 0.08);
+        }
+
+        .refresh-button {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 13px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+
+        /* =====================================
+           LOADING
+        ===================================== */
+
+        #loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+        }
+
+        .loader {
+            width: 42px;
+            height: 42px;
+            border: 4px solid #e9e8ff;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 18px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* =====================================
+           ERROR
+        ===================================== */
+
+        #errorMessage {
+            display: none;
+            background: #fff1f0;
+            border: 1px solid #ffd5d2;
+            color: var(--danger);
+            padding: 18px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+
+        /* =====================================
+           EMPTY
+        ===================================== */
+
+        #emptyState {
+            display: none;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            text-align: center;
+            padding: 70px 25px;
+        }
+
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        #emptyState h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        #emptyState p {
+            color: var(--muted);
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto 25px;
+        }
+
+
+        /* =====================================
+           SITES GRID
+        ===================================== */
+
+        #sitesGrid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .site-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            overflow: hidden;
+            transition: 0.25s;
+        }
+
+        .site-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 45px rgba(23, 32, 51, 0.08);
+        }
+
+
+        /* =====================================
+           SITE COVER
+        ===================================== */
+
+        .site-cover {
+            height: 150px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #635bff,
+                    #8b7cff,
+                    #5148e8
+                );
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .site-cover h3 {
+            font-size: 24px;
+            max-width: 90%;
+            word-break: break-word;
+        }
+
+        .status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.92);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status.ready {
+            color: var(--success);
+        }
+
+        .status.generating {
+            color: var(--warning);
+        }
+
+        .status.published {
+            color: var(--primary);
+        }
+
+        .status.archived {
+            color: var(--muted);
+        }
+
+
+        /* =====================================
+           SITE CONTENT
+        ===================================== */
+
+        .site-content {
+            padding: 22px;
+        }
+
+        .site-description {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 14px;
+            min-height: 45px;
+            margin-bottom: 16px;
+        }
+
+        .site-date {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+
+        /* =====================================
+           ACTIONS
+        ===================================== */
+
+        .site-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .action-button {
+            height: 43px;
+            border-radius: 11px;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text);
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .action-button:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .action-button.primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .action-button.primary:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .action-button.danger {
+            color: var(--danger);
+        }
+
+        .action-button.danger:hover {
+            border-color: var(--danger);
+        }
+
+
+        /* =====================================
+           RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 750px) {
+
+            header {
+                padding: 0 5%;
+            }
+
+            .page-header {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .create-button {
+                width: 100%;
+            }
+
+            .toolbar {
+                padding: 12px;
+            }
+
+            #sitesGrid {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                padding-top: 35px;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .back-link {
+                font-size: 13px;
+            }
+
+            .page-header h1 {
+                font-size: 34px;
+            }
+
+            .site-cover {
+                height: 135px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================== -->
+
+<header>
+
+    <a
+        href="site-vitrine.html"
+        class="logo"
+    >
+        NEXORA
+    </a>
+
+
+    <a
+        href="site-vitrine.html"
+        class="back-link"
+    >
+        ← Site vitrine
+    </a>
+
+</header>
+
+
+
+<!-- =========================================
+     MAIN
+========================================== -->
+
+<main>
+
+
+    <!-- EN-TÊTE -->
+
+    <section class="page-header">
+
+        <div>
+
+            <h1>
+                Mes sites
+            </h1>
+
+            <p>
+                Retrouvez ici tous vos sites créés
+                avec NEXORA. Gérez, modifiez et préparez
+                leur publication depuis un seul espace.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="create-button"
+            id="createSiteButton"
+        >
+            + Créer un site
+        </button>
+
+    </section>
+
+
+
+    <!-- RECHERCHE -->
+
+    <section class="toolbar">
+
+        <div class="search-box">
+
+            <span>
+                🔍
+            </span>
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Rechercher un site..."
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            class="refresh-button"
+            id="refreshButton"
+            title="Actualiser"
+        >
+            ↻
+        </button>
+
+    </section>
+
+
+
+    <!-- ERREUR -->
+
+    <div id="errorMessage"></div>
+
+
+
+    <!-- CHARGEMENT -->
+
+    <div id="loading">
+
+        <div class="loader"></div>
+
+        <p>
+            Chargement de vos sites...
+        </p>
+
+    </div>
+
+
+
+    <!-- AUCUN SITE -->
+
+    <section id="emptyState">
+
+        <div class="empty-icon">
+            🌐
+        </div>
+
+        <h2>
+            Aucun site pour le moment
+        </h2>
+
+        <p>
+            Vous n'avez encore créé aucun site.
+            Commencez maintenant et laissez NEXORA
+            construire votre présence web.
+        </p>
+
+        <button
+            type="button"
+            class="create-button"
+            id="emptyCreateButton"
+        >
+            ✨ Créer mon premier site
+        </button>
+
+    </section>
+
+
+
+    <!-- LISTE DES SITES -->
+
+    <section
+        id="sitesGrid"
+    ></section>
+
+
+</main>
+
+
+
+<!-- =========================================
+     SUPABASE
+========================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+const SUPABASE_URL =
+    "https://klvgazjmrxflcrfzauao.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const sitesGrid =
+    document.getElementById("sitesGrid");
+
+const loading =
+    document.getElementById("loading");
+
+const emptyState =
+    document.getElementById("emptyState");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const refreshButton =
+    document.getElementById("refreshButton");
+
+const createSiteButton =
+    document.getElementById("createSiteButton");
+
+const emptyCreateButton =
+    document.getElementById("emptyCreateButton");
+
+
+
+let allSites = [];
+
+
+
+/* =========================================
+   AUTHENTIFICATION
+========================================= */
+
+async function verifierUtilisateur() {
+
+    const {
+        data: {
+            user
+        }
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
+
+
+    if (!user) {
+
+        window.location.href =
+            "connexion.html";
+
+        return null;
+
+    }
+
+
+    return user;
+
+}
+
+
+
+/* =========================================
+   CHARGER LES SITES
+========================================= */
+
+async function chargerSites() {
+
+    loading.style.display =
+        "block";
+
+    emptyState.style.display =
+        "none";
+
+    errorMessage.style.display =
+        "none";
+
+    sitesGrid.innerHTML =
+        "";
+
+
+    const user =
+        await verifierUtilisateur();
+
+
+    if (!user) {
+        return;
+    }
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("websites")
+                .select("*")
+                .eq(
+                    "user_id",
+                    user.id
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        allSites =
+            data || [];
+
+
+        afficherSites(
+            allSites
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Erreur chargement sites :",
+            error
+        );
+
+
+        errorMessage.textContent =
+            "Impossible de charger vos sites. " +
+            (
+                error.message ||
+                "Veuillez réessayer."
+            );
+
+
+        errorMessage.style.display =
+            "block";
+
+    }
+
+    finally {
+
+        loading.style.display =
+            "none";
+
+    }
+
+}
+
+
+
+/* =========================================
+   AFFICHER LES SITES
+========================================= */
+
+function afficherSites(sites) {
+
+    sitesGrid.innerHTML =
+        "";
+
+
+    if (!sites.length) {
+
+        emptyState.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    emptyState.style.display =
+        "none";
+
+
+    sites.forEach(
+        function (site) {
+
+            const card =
+                document.createElement("article");
+
+
+            card.className =
+                "site-card";
+
+
+            const status =
+                obtenirStatut(
+                    site.status
+                );
+
+
+            const date =
+                formaterDate(
+                    site.created_at
+                );
+
+
+            const description =
+                site.description ||
+                "Aucune description disponible.";
+
+
+            card.innerHTML = `
+
+                <div class="site-cover">
+
+                    <span
+                        class="status ${status.className}"
+                    >
+                        ${status.label}
+                    </span>
+
+                    <h3>
+                        ${echapperHTML(
+                            site.name ||
+                            "Site sans nom"
+                        )}
+                    </h3>
+
+                </div>
+
+
+                <div class="site-content">
+
+                    <p class="site-description">
+                        ${echapperHTML(
+                            description
+                        )}
+                    </p>
+
+
+                    <p class="site-date">
+                        Créé le ${date}
+                    </p>
+
+
+                    <div class="site-actions">
+
+                        <button
+                            type="button"
+                            class="action-button primary"
+                            onclick="modifierSite('${site.id}')"
+                        >
+                            ✏️ Modifier
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="action-button"
+                            onclick="apercuSite('${site.id}')"
+                        >
+                            👁️ Aperçu
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="action-button"
+                            onclick="publierSite('${site.id}')"
+                        >
+                            🌐 Publier
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="action-button danger"
+                            onclick="supprimerSite('${site.id}')"
+                        >
+                            🗑️ Supprimer
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            sitesGrid.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+
+
+/* =========================================
+   STATUT
+========================================= */
+
+function obtenirStatut(status) {
+
+    switch (status) {
+
+        case "ready":
+
+            return {
+                label: "Prêt",
+                className: "ready"
+            };
+
+
+        case "generating":
+
+            return {
+                label: "Génération...",
+                className: "generating"
+            };
+
+
+        case "published":
+
+            return {
+                label: "Publié",
+                className: "published"
+            };
+
+
+        case "archived":
+
+            return {
+                label: "Archivé",
+                className: "archived"
+            };
+
+
+        default:
+
+            return {
+                label: "Brouillon",
+                className: "archived"
+            };
+
+    }
+
+}
+
+
+
+/* =========================================
+   DATE
+========================================= */
+
+function formaterDate(date) {
+
+    if (!date) {
+        return "Date inconnue";
+    }
+
+
+    return new Date(date)
+        .toLocaleDateString(
+            "fr-FR",
+            {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+}
+
+
+
+/* =========================================
+   PROTECTION HTML
+========================================= */
+
+function echapperHTML(texte) {
+
+    return String(texte)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+/* =========================================
+   RECHERCHE
+========================================= */
+
+searchInput.addEventListener(
+    "input",
+    function () {
+
+        const recherche =
+            this.value
+                .toLowerCase()
+                .trim();
+
+
+        if (!recherche) {
+
+            afficherSites(
+                allSites
+            );
+
+            return;
+
+        }
+
+
+        const resultats =
+            allSites.filter(
+                function (site) {
+
+                    return (
+
+                        (
+                            site.name ||
+                            ""
+                        )
+                        .toLowerCase()
+                        .includes(recherche)
+
+                        ||
+
+                        (
+                            site.description ||
+                            ""
+                        )
+                        .toLowerCase()
+                        .includes(recherche)
+
+                    );
+
+                }
+            );
+
+
+        afficherSites(
+            resultats
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   CRÉER UN SITE
+========================================= */
+
+function allerCreation() {
+
+    window.location.href =
+        "creer-site.html";
+
+}
+
+
+createSiteButton.addEventListener(
+    "click",
+    allerCreation
+);
+
+
+emptyCreateButton.addEventListener(
+    "click",
+    allerCreation
+);
+
+
+
+/* =========================================
+   ACTUALISER
+========================================= */
+
+refreshButton.addEventListener(
+    "click",
+    function () {
+
+        chargerSites();
+
+    }
+);
+
+
+
+/* =========================================
+   MODIFIER
+========================================= */
+
+function modifierSite(siteId) {
+
+    /*
+     * L'éditeur visuel sera connecté ici
+     * dans la prochaine étape.
+     */
+
+    window.location.href =
+        "editeur-site.html?id=" +
+        encodeURIComponent(siteId);
+
+}
+
+
+
+/* =========================================
+   APERÇU
+========================================= */
+
+function apercuSite(siteId) {
+
+    alert(
+        "👁️ L'aperçu du site sera disponible lorsque le moteur de génération visuelle NEXORA sera connecté."
+    );
+
+}
+
+
+
+/* =========================================
+   PUBLICATION
+========================================= */
+
+async function publierSite(siteId) {
+
+    const confirmation =
+        confirm(
+            "Voulez-vous préparer ce site pour sa publication ?"
+        );
+
+
+    if (!confirmation) {
+        return;
+    }
+
+
+    try {
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("websites")
+                .update({
+
+                    status: "published",
+
+                    published_at:
+                        new Date()
+                            .toISOString()
+
+                })
+                .eq(
+                    "id",
+                    siteId
+                );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        alert(
+            "🌐 Le site est maintenant marqué comme publié."
+        );
+
+
+        chargerSites();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "❌ Impossible de publier le site."
+        );
+
+    }
+
+}
+
+
+
+/* =========================================
+   SUPPRESSION
+========================================= */
+
+async function supprimerSite(siteId) {
+
+    const confirmation =
+        confirm(
+            "⚠️ Voulez-vous vraiment supprimer ce site ?\n\n" +
+            "Cette action supprimera également ses pages, sections et paramètres."
+        );
+
+
+    if (!confirmation) {
+        return;
+    }
+
+
+    try {
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("websites")
+                .delete()
+                .eq(
+                    "id",
+                    siteId
+                );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        alert(
+            "🗑️ Le site a été supprimé."
+        );
+
+
+        chargerSites();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Erreur suppression :",
+            error
+        );
+
+
+        alert(
+            "❌ Impossible de supprimer le site.\n\n" +
+            (
+                error.message ||
+                "Veuillez réessayer."
+            )
+        );
+
+    }
+
+}
+
+
+
+/* =========================================
+   INITIALISATION
+========================================= */
+
+chargerSites();
+
+</script>
+
+
+</body>
+
+</html>

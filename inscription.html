@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Créer votre compte — NEXORA</title>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            color: #172033;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(99, 91, 255, 0.12),
+                    transparent 45%
+                ),
+                #f7f8fc;
+
+        }
+
+
+        .register-page {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px 20px;
+
+        }
+
+
+        .register-card {
+
+            width: 100%;
+
+            max-width: 480px;
+
+            background: #ffffff;
+
+            padding: 42px 34px;
+
+            border-radius: 24px;
+
+            border: 1px solid #e8eaf0;
+
+            box-shadow:
+                0 20px 60px
+                rgba(40, 40, 80, 0.10);
+
+        }
+
+
+        .register-logo {
+
+            text-align: center;
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            color: #635bff;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .register-card h1 {
+
+            text-align: center;
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #667085;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: 1px solid #d9d9e3;
+
+            border-radius: 11px;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #635bff;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(99, 91, 255, 0.10);
+
+        }
+
+
+        .register-button {
+
+            width: 100%;
+
+            padding: 15px;
+
+            margin-top: 7px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background: #635bff;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+
+        }
+
+
+        .register-button:hover {
+
+            background: #5148e8;
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .register-button:disabled {
+
+            opacity: 0.7;
+
+            cursor: wait;
+
+            transform: none;
+
+        }
+
+
+        #message {
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            font-weight: 600;
+
+            color: #667085;
+
+            min-height: 20px;
+
+        }
+
+
+        .login {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #667085;
+
+        }
+
+
+        .login a {
+
+            color: #635bff;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+        }
+
+
+        .back {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #667085;
+
+            text-decoration: none;
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .register-page {
+
+                padding: 20px 15px;
+
+            }
+
+
+            .register-card {
+
+                padding: 32px 22px;
+
+                border-radius: 20px;
+
+            }
+
+
+            .register-card h1 {
+
+                font-size: 27px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="register-page">
+
+
+    <div class="register-card">
+
+
+        <div class="register-logo">
+            NEXORA
+        </div>
+
+
+        <h1>
+            Créer votre compte
+        </h1>
+
+
+        <p class="subtitle">
+            Rejoignez NEXORA et développez vos projets.
+        </p>
+
+
+        <form id="inscriptionForm">
+
+
+            <div class="form-group">
+
+                <label for="nom">
+                    Nom
+                </label>
+
+                <input
+                    type="text"
+                    id="nom"
+                    placeholder="Votre nom"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="prenom">
+                    Prénom
+                </label>
+
+                <input
+                    type="text"
+                    id="prenom"
+                    placeholder="Votre prénom"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Adresse e-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="exemple@email.com"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Mot de passe
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Votre mot de passe"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="confirm-password">
+                    Confirmer le mot de passe
+                </label>
+
+                <input
+                    type="password"
+                    id="confirm-password"
+                    placeholder="Confirmez votre mot de passe"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="register-button"
+                id="submitButton"
+            >
+                Créer mon compte
+            </button>
+
+
+        </form>
+
+
+        <p id="message"></p>
+
+
+        <p class="login">
+
+            Vous avez déjà un compte ?
+
+            <a href="connexion.html">
+                Se connecter
+            </a>
+
+        </p>
+
+
+        <a
+            href="index.html"
+            class="back"
+        >
+            ← Retour à NEXORA
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://klvgazjmrxflcrfzauao.supabase.co";
+
+
+const SUPABASE_KEY =
+"sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+const form =
+document.getElementById("inscriptionForm");
+
+
+const message =
+document.getElementById("message");
+
+
+const submitButton =
+document.getElementById("submitButton");
+
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const nom =
+            document
+            .getElementById("nom")
+            .value
+            .trim();
+
+
+        const prenom =
+            document
+            .getElementById("prenom")
+            .value
+            .trim();
+
+
+        const email =
+            document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        const password =
+            document
+            .getElementById("password")
+            .value;
+
+
+        const confirmPassword =
+            document
+            .getElementById("confirm-password")
+            .value;
+
+
+        if (password !== confirmPassword) {
+
+            message.textContent =
+                "Les deux mots de passe ne correspondent pas.";
+
+            return;
+        }
+
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "Création du compte...";
+
+
+        message.textContent = "";
+
+
+        const { error } =
+            await supabaseClient.auth.signUp({
+
+                email: email,
+
+                password: password,
+
+                options: {
+
+                    emailRedirectTo:
+                        "https://alioumarou752-hub.github.io/NEXORA/",
+
+                    data: {
+
+                        nom: nom,
+
+                        prenom: prenom
+
+                    }
+
+                }
+
+            });
+
+
+        if (error) {
+
+            message.textContent =
+                "Erreur : " +
+                error.message;
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "Créer mon compte";
+
+            return;
+
+        }
+
+
+        message.textContent =
+            "Compte créé ! Vérifiez votre adresse e-mail.";
+
+
+        form.reset();
+
+
+        submitButton.disabled = false;
+
+        submitButton.textContent =
+            "Créer mon compte";
+
+    }
+
+);
+
+</script>
+
+
+</body>
+
+</html>

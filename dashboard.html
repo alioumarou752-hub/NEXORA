@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>NEXORA — Votre espace</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head><body><!-- =========================
+     EN-TÊTE
+========================= --><header class="dashboard-header"><div class="container header-content">
+
+    <div class="dashboard-brand">
+
+        <div class="logo">
+            NEXORA
+        </div>
+
+        <span>
+            Votre espace
+        </span>
+
+    </div>
+
+
+    <button
+        id="deconnexionBtn"
+        class="btn btn-danger"
+    >
+        Déconnexion
+    </button>
+
+</div>
+
+</header><!-- =========================
+     CONTENU
+========================= --><main><section class="dashboard">
+
+    <div class="container">
+
+
+        <!-- =========================
+             INTRODUCTION
+        ========================== -->
+
+        <div class="welcome-card">
+
+            <div class="welcome-content">
+
+                <span class="welcome-badge">
+                    ✦ NEXORA
+                </span>
+
+
+                <h1 id="welcomeTitle">
+                    Bienvenue sur NEXORA 👋
+                </h1>
+
+
+                <p>
+                    Tout ce dont vous avez besoin
+                    pour créer, développer et donner
+                    vie à vos idées.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             TITRE
+        ========================== -->
+
+        <section class="features dashboard-features">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        ESPACE NEXORA
+                    </span>
+
+
+                    <h2>
+                        Que souhaitez-vous créer ?
+                    </h2>
+
+
+                    <p>
+                        Choisissez une solution pour commencer.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 SERVICES
+            ========================== -->
+
+            <div class="cards">
+
+
+                <!-- =========================
+                     SITE WEB
+                ========================== -->
+
+                <a
+                    href="service.html?service=Site%20web"
+                    class="card dashboard-card service-card"
+                >
+
+                    <div class="card-icon">
+                        🌐
+                    </div>
+
+
+                    <h3>
+                        Site web
+                    </h3>
+
+
+                    <p>
+                        Créez un site web professionnel
+                        pour votre activité, votre entreprise
+                        ou votre projet.
+                    </p>
+
+
+                    <span class="card-link">
+                        Découvrir →
+                    </span>
+
+                </a>
+
+
+
+                <!-- =========================
+                     AFFICHE & LOGO
+                ========================== -->
+
+                <a
+                    href="service.html?service=Affiche%20%26%20Logo"
+                    class="card dashboard-card service-card"
+                >
+
+                    <div class="card-icon">
+                        🎨
+                    </div>
+
+
+                    <h3>
+                        Affiche & Logo
+                    </h3>
+
+
+                    <p>
+                        Créez des affiches, logos et visuels
+                        professionnels pour votre marque.
+                    </p>
+
+
+                    <span class="card-link">
+                        Découvrir →
+                    </span>
+
+                </a>
+
+
+
+                <!-- =========================
+                     NEXORA AI
+                ========================== -->
+
+                <a
+                    href="#"
+                    class="card dashboard-card service-card"
+                >
+
+                    <div class="card-icon">
+                        🤖
+                    </div>
+
+
+                    <h3>
+                        NEXORA AI
+                    </h3>
+
+
+                    <p>
+                        Un assistant intelligent pour vous
+                        aider à réfléchir, créer et développer
+                        vos idées.
+                    </p>
+
+
+                    <span class="coming-soon">
+                        Bientôt disponible
+                    </span>
+
+                </a>
+
+
+
+                <!-- =========================
+                     IA POUR ENTREPRISES
+                ========================== -->
+
+                <a
+                    href="#"
+                    class="card dashboard-card service-card"
+                >
+
+                    <div class="card-icon">
+                        🏢
+                    </div>
+
+
+                    <h3>
+                        Outils IA pour entreprises
+                    </h3>
+
+
+                    <p>
+                        Des outils intelligents conçus pour
+                        automatiser et développer votre entreprise.
+                    </p>
+
+
+                    <span class="coming-soon">
+                        Bientôt disponible
+                    </span>
+
+                </a>
+
+
+
+                <!-- =========================
+                     VIDÉO IA
+                ========================== -->
+
+                <a
+                    href="#"
+                    class="card dashboard-card service-card"
+                >
+
+                    <div class="card-icon">
+                        🎬
+                    </div>
+
+
+                    <h3>
+                        Vidéo IA
+                    </h3>
+
+
+                    <p>
+                        Créez des vidéos à partir de textes
+                        ou d'images grâce à l'intelligence
+                        artificielle.
+                    </p>
+
+
+                    <span class="coming-soon">
+                        Bientôt disponible
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</section>
+
+</main><!-- =========================
+     PIED DE PAGE
+========================= --><footer><div class="container">
+
+    <p>
+        © 2026 NEXORA — Développez vos idées.
+    </p>
+
+</div>
+
+</footer><!-- =========================
+     SUPABASE
+========================= --><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+
+const SUPABASE_URL =
+"https://klvgazjmrxflcrfzauao.supabase.co";
+
+
+const SUPABASE_KEY =
+"sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+
+/* =========================
+   VÉRIFIER L'UTILISATEUR
+========================= */
+
+async function chargerUtilisateur() {
+
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+
+        window.location.href =
+            "connexion.html";
+
+        return;
+
+    }
+
+
+    const prenom =
+        user.user_metadata?.prenom || "";
+
+
+    const nom =
+        user.user_metadata?.nom || "";
+
+
+    const nomComplet =
+        `${prenom} ${nom}`.trim();
+
+
+    const welcomeTitle =
+        document.getElementById(
+            "welcomeTitle"
+        );
+
+
+    if (nomComplet) {
+
+        welcomeTitle.textContent =
+            `Bienvenue, ${nomComplet} 👋`;
+
+    }
+
+}
+
+
+
+/* =========================
+   DÉCONNEXION
+========================= */
+
+document
+    .getElementById(
+        "deconnexionBtn"
+    )
+    .addEventListener(
+        "click",
+        async function () {
+
+            await supabaseClient
+                .auth
+                .signOut();
+
+
+            window.location.href =
+                "connexion.html";
+
+        }
+    );
+
+
+
+/* =========================
+   LANCEMENT
+========================= */
+
+chargerUtilisateur();
+
+</script>
+</body>
+</html>

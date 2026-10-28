@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA — Service</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================
+           PAGE SERVICE NEXORA
+        ========================= */
+
+        body {
+            background:
+                radial-gradient(circle at 10% 10%, rgba(99, 91, 255, 0.10), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(124, 58, 237, 0.08), transparent 30%),
+                #f7f8fc;
+        }
+
+        .service-page {
+            padding: 40px 0 70px;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .service-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 45px;
+        }
+
+        .service-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .service-brand-logo {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #635bff,
+                #7c3aed
+            );
+
+            color: white;
+            font-size: 21px;
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 25px rgba(99, 91, 255, 0.25);
+        }
+
+        .service-brand-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: #172033;
+        }
+
+        .back-dashboard {
+            text-decoration: none;
+            color: #667085;
+            font-weight: 600;
+
+            padding: 10px 16px;
+            border: 1px solid #e8eaf0;
+            border-radius: 12px;
+
+            background: white;
+
+            transition: 0.25s;
+        }
+
+        .back-dashboard:hover {
+            color: #635bff;
+            border-color: #635bff;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .service-hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e1b4b
+                );
+
+            border-radius: 28px;
+            padding: 45px;
+
+            color: white;
+
+            position: relative;
+            overflow: hidden;
+
+            margin-bottom: 45px;
+
+            box-shadow:
+                0 25px 60px rgba(17, 24, 39, 0.18);
+        }
+
+        .service-hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            right: -100px;
+            top: -120px;
+
+            border-radius: 50%;
+
+            background: rgba(99, 91, 255, 0.25);
+
+            filter: blur(10px);
+        }
+
+        .service-hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 200px;
+            height: 200px;
+
+            left: 40%;
+            bottom: -140px;
+
+            border-radius: 50%;
+
+            background: rgba(124, 58, 237, 0.20);
+
+            filter: blur(20px);
+        }
+
+        .service-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 750px;
+        }
+
+        .service-badge {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 7px 13px;
+
+            border-radius: 30px;
+
+            background: rgba(255,255,255,0.10);
+            border: 1px solid rgba(255,255,255,0.15);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 18px;
+        }
+
+        .service-hero h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            line-height: 1.08;
+            margin: 0 0 18px;
+
+            letter-spacing: -1.5px;
+        }
+
+        .service-hero p {
+            font-size: 17px;
+            line-height: 1.7;
+
+            color: rgba(255,255,255,0.75);
+
+            max-width: 680px;
+
+            margin: 0;
+        }
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .services-section {
+            margin-top: 10px;
+        }
+
+        .section-heading {
+            margin-bottom: 25px;
+        }
+
+        .section-heading span {
+            color: #635bff;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .section-heading h2 {
+            margin: 8px 0 8px;
+
+            font-size: 30px;
+            color: #172033;
+        }
+
+        .section-heading p {
+            margin: 0;
+
+            color: #667085;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .services-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 22px;
+        }
+
+        .service-card {
+            background: white;
+
+            border: 1px solid #e8eaf0;
+
+            border-radius: 22px;
+
+            padding: 28px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .service-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #635bff,
+                    #7c3aed
+                );
+
+            opacity: 0;
+
+            transition: 0.25s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+
+            border-color: rgba(99, 91, 255, 0.25);
+
+            box-shadow:
+                0 20px 45px rgba(31, 41, 55, 0.10);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 54px;
+            height: 54px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 16px;
+
+            background: #f0efff;
+
+            font-size: 25px;
+
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            margin: 0 0 10px;
+
+            color: #172033;
+
+            font-size: 20px;
+        }
+
+        .service-card p {
+            margin: 0 0 22px;
+
+            color: #667085;
+
+            line-height: 1.65;
+
+            font-size: 14px;
+        }
+
+        .service-list {
+            list-style: none;
+
+            padding: 0;
+            margin: 0 0 25px;
+        }
+
+        .service-list li {
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            margin-bottom: 10px;
+
+            color: #344054;
+
+            font-size: 14px;
+        }
+
+        .service-list li::before {
+            content: "✓";
+
+            width: 20px;
+            height: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #eeecff;
+
+            color: #635bff;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .service-btn {
+            width: 100%;
+
+            border: none;
+
+            border-radius: 13px;
+
+            padding: 13px 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #635bff,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+            box-shadow:
+                0 10px 22px rgba(99, 91, 255, 0.20);
+        }
+
+        .service-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 28px rgba(99, 91, 255, 0.28);
+        }
+
+        /* =========================
+           EMPTY / ERROR
+        ========================= */
+
+        .service-message {
+            background: white;
+
+            border: 1px solid #e8eaf0;
+
+            border-radius: 20px;
+
+            padding: 35px;
+
+            text-align: center;
+
+            color: #667085;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .service-footer {
+            text-align: center;
+
+            padding-top: 55px;
+
+            color: #98a2b3;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .service-page {
+                padding: 25px 0 50px;
+            }
+
+            .service-top {
+                align-items: flex-start;
+            }
+
+            .service-brand-name {
+                font-size: 19px;
+            }
+
+            .back-dashboard {
+                font-size: 13px;
+                padding: 9px 12px;
+            }
+
+            .service-hero {
+                padding: 30px 24px;
+                border-radius: 22px;
+            }
+
+            .service-hero h1 {
+                font-size: 34px;
+            }
+
+            .service-hero p {
+                font-size: 15px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading h2 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<main class="service-page">
+
+    <div class="container">
+
+        <!-- =========================
+             TOP
+        ========================= -->
+
+        <div class="service-top">
+
+            <div class="service-brand">
+
+                <div class="service-brand-logo">
+                    N
+                </div>
+
+                <div class="service-brand-name">
+                    NEXORA
+                </div>
+
+            </div>
+
+            <a
+                href="dashboard.html"
+                class="back-dashboard"
+            >
+                ← Tableau de bord
+            </a>
+
+        </div>
+
+
+        <!-- =========================
+             HERO
+        ========================= -->
+
+        <section class="service-hero">
+
+            <div class="service-hero-content">
+
+                <div class="service-badge">
+                    ✦ SOLUTIONS NEXORA
+                </div>
+
+                <h1 id="serviceTitle">
+                    Nos solutions
+                </h1>
+
+                <p id="serviceDescription">
+                    Transformez vos idées en solutions
+                    numériques modernes, professionnelles
+                    et adaptées à vos besoins.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SERVICES
+        ========================= -->
+
+        <section class="services-section">
+
+            <div class="section-heading">
+
+                <span>Explorez nos solutions</span>
+
+                <h2 id="sectionTitle">
+                    Ce que nous pouvons créer pour vous
+                </h2>
+
+                <p id="sectionDescription">
+                    Choisissez une solution et envoyez
+                    votre demande à l'équipe NEXORA.
+                </p>
+
+            </div>
+
+
+            <div
+                class="services-grid"
+                id="servicesGrid"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FOOTER
+        ========================= -->
+
+        <footer class="service-footer">
+
+            <p>
+                © 2026 NEXORA — Développez vos idées.
+            </p>
+
+        </footer>
+
+    </div>
+
+</main>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://klvgazjmrxflcrfzauao.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* =========================
+   DONNÉES DES SERVICES
+========================= */
+
+const services = {
+
+    "Site web": {
+
+        icon: "🌐",
+
+        title: "Création de sites web",
+
+        description:
+        "Donnez à votre activité une présence professionnelle sur Internet avec une solution moderne, rapide et adaptée à vos objectifs.",
+
+        section:
+        "Construisez votre présence digitale",
+
+        items: [
+
+            {
+                icon: "🌐",
+                title: "Site vitrine",
+                description:
+                "Présentez votre entreprise, vos services et vos coordonnées avec un site professionnel.",
+                service: "Site vitrine"
+            },
+
+            {
+                icon: "🛒",
+                title: "Site e-commerce",
+                description:
+                "Créez une boutique en ligne pour présenter et vendre vos produits.",
+                service: "Site e-commerce"
+            },
+
+            {
+                icon: "💻",
+                title: "Application web",
+                description:
+                "Développez une plateforme web interactive adaptée à votre projet.",
+                service: "Application web"
+            },
+
+            {
+                icon: "🎨",
+                title: "Design & interface",
+                description:
+                "Concevez une interface moderne, claire et agréable à utiliser.",
+                service: "Design & interface web"
+            }
+
+        ]
+
+    },
+
+
+    "Affiche & Logo": {
+
+        icon: "🎨",
+
+        title: "Design & identité visuelle",
+
+        description:
+        "Construisez une image professionnelle et reconnaissable pour votre entreprise, votre marque ou votre projet.",
+
+        section:
+        "Donnez une identité à vos idées",
+
+        items: [
+
+            {
+                icon: "🖼️",
+                title: "Affiche publicitaire",
+                description:
+                "Des affiches professionnelles pour promouvoir vos produits, services ou événements.",
+                service: "Affiche publicitaire"
+            },
+
+            {
+                icon: "✨",
+                title: "Logo",
+                description:
+                "Un logo moderne et mémorable pour représenter votre marque.",
+                service: "Création de logo"
+            },
+
+            {
+                icon: "💎",
+                title: "Identité visuelle",
+                description:
+                "Construisez une identité cohérente pour votre entreprise.",
+                service: "Identité visuelle"
+            },
+
+            {
+                icon: "📱",
+                title: "Design réseaux sociaux",
+                description:
+                "Créez des visuels professionnels pour Facebook, Instagram, TikTok et autres plateformes.",
+                service: "Design réseaux sociaux"
+            }
+
+        ]
+
+    }
+
+};
+
+
+/* =========================
+   RÉCUPÉRER LE SERVICE
+========================= */
+
+const params =
+new URLSearchParams(
+    window.location.search
+);
+
+const serviceName =
+params.get("service") || "Site web";
+
+
+/* =========================
+   AFFICHER LE SERVICE
+========================= */
+
+function afficherService() {
+
+    const data =
+    services[serviceName];
+
+    const title =
+    document.getElementById("serviceTitle");
+
+    const description =
+    document.getElementById("serviceDescription");
+
+    const sectionTitle =
+    document.getElementById("sectionTitle");
+
+    const grid =
+    document.getElementById("servicesGrid");
+
+
+    if (!data) {
+
+        title.textContent =
+        "Service NEXORA";
+
+        description.textContent =
+        "Découvrez prochainement cette nouvelle solution NEXORA.";
+
+        sectionTitle.textContent =
+        "Bientôt disponible";
+
+        grid.innerHTML = `
+
+            <div class="service-message">
+
+                <h3>🚀 Cette fonctionnalité arrive bientôt</h3>
+
+                <p>
+                    L'équipe NEXORA travaille actuellement
+                    sur cette solution.
+                </p>
+
+                <br>
+
+                <a
+                    href="dashboard.html"
+                    class="back-dashboard"
+                >
+                    ← Retour à NEXORA
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    title.textContent =
+    data.icon + " " + data.title;
+
+    description.textContent =
+    data.description;
+
+    sectionTitle.textContent =
+    data.section;
+
+
+    grid.innerHTML =
+    data.items.map(item => `
+
+        <article class="service-card">
+
+            <div class="service-icon">
+                ${item.icon}
+            </div>
+
+            <h3>
+                ${item.title}
+            </h3>
+
+            <p>
+                ${item.description}
+            </p>
+
+            <ul class="service-list">
+
+                <li>
+                    Solution professionnelle
+                </li>
+
+                <li>
+                    Adaptée à votre projet
+                </li>
+
+                                <li>
+                    Accompagnement NEXORA
+                </li>
+
+            </ul>
+
+            ${
+                item.title === "Site vitrine"
+                    ? `
+                        <a
+                            href="site-vitrine.html"
+                            class="service-btn">
+                            Créer mon site vitrine →
+                        </a>
+                      `
+                    : `
+                        <button
+                            onclick="demanderService('${item.title}')"
+                            class="service-btn">
+                            Demander cette solution →
+                        </button>
+                      `
+            }
+
+        </article>
+
+    `).join("");
+
+}
+
+
+/* =========================
+   DEMANDE DE SERVICE
+========================= */
+
+async function demanderService(service) {
+
+    const {
+        data: {
+            user
+        }
+    } =
+    await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+
+        alert(
+            "Veuillez vous connecter pour demander cette solution."
+        );
+
+        window.location.href =
+        "connexion.html";
+
+        return;
+    }
+
+
+    const nom =
+    (
+        (user.user_metadata?.prenom || "") +
+        " " +
+        (user.user_metadata?.nom || "")
+    ).trim();
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+    .from("demande_services")
+    .insert({
+
+        client_id:
+        user.id,
+
+        nom:
+        nom,
+
+        service:
+        service,
+
+        description:
+        "",
+
+        email:
+        user.email,
+
+        statut:
+        "en attente"
+
+    });
+
+
+    if (error) {
+
+        alert(
+            "Une erreur est survenue : " +
+            error.message
+        );
+
+        return;
+    }
+
+
+    alert(
+        "✅ Votre demande pour « " +
+        service +
+        " » a bien été envoyée à NEXORA."
+    );
+
+}
+
+
+/* =========================
+   LANCEMENT
+========================= */
+
+afficherService();
+
+</script>
+
+</body>
+</html>
