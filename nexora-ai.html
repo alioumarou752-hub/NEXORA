@@ -1,0 +1,434 @@
+<!DOCTYPE html><html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA AI — Votre assistant intelligent</title><style>
+:root {
+    --primary: #635bff;
+    --secondary: #5148e8;
+    --dark: #101426;
+    --text: #20263a;
+    --muted: #8991a5;
+    --background: #f7f8fc;
+    --border: #e8eaf0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 270px;
+    background: var(--dark);
+    color: white;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 35px;
+}
+
+.logo span {
+    color: #8b83ff;
+}
+
+.new-chat {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #41445a;
+    background: #20243a;
+    color: white;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.sidebar-label {
+    color: #8e95aa;
+    font-size: 12px;
+    margin: 30px 0 15px;
+}
+
+.history-empty {
+    color: #777f94;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 25px;
+    border-top: 1px solid #34384d;
+    color: #c4c8d5;
+    font-size: 13px;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.topbar {
+    height: 75px;
+    padding: 0 35px;
+    border-bottom: 1px solid var(--border);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbar h2 {
+    font-size: 18px;
+}
+
+.status {
+    font-size: 12px;
+    color: #15966b;
+    background: #e8f8f1;
+    padding: 8px 12px;
+    border-radius: 20px;
+}
+
+.chat-area {
+    flex: 1;
+    width: 100%;
+    max-width: 950px;
+    margin: auto;
+    padding: 35px 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome {
+    margin: auto;
+    text-align: center;
+    max-width: 600px;
+    padding: 35px 0;
+}
+
+.ai-icon {
+    width: 75px;
+    height: 75px;
+    background: linear-gradient(135deg, #635bff, #938bff);
+    border-radius: 24px;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 32px;
+    margin: 0 auto 25px;
+    box-shadow: 0 12px 30px #635bff35;
+}
+
+.welcome h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.welcome h1 span {
+    color: var(--primary);
+}
+
+.welcome p {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.suggestions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.suggestion {
+    text-align: left;
+    padding: 16px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    cursor: pointer;
+    transition: .2s;
+    font-size: 13px;
+    color: var(--text);
+}
+
+.suggestion:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding-bottom: 25px;
+}
+
+.message {
+    max-width: 85%;
+    padding: 16px 18px;
+    border-radius: 16px;
+    line-height: 1.7;
+    font-size: 14px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.message.user {
+    align-self: flex-end;
+    background: var(--primary);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.message.assistant {
+    align-self: flex-start;
+    background: white;
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+}
+
+.composer-wrapper {
+    padding: 18px 25px 22px;
+    background: white;
+    border-top: 1px solid var(--border);
+}
+
+.composer {
+    max-width: 850px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 10px 9px 18px;
+    border: 1px solid #dfe2eb;
+    border-radius: 17px;
+    background: white;
+    box-shadow: 0 5px 20px #10142608;
+}
+
+.composer textarea {
+    flex: 1;
+    resize: none;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    min-height: 25px;
+    max-height: 120px;
+    padding-top: 5px;
+}
+
+.send-button {
+    width: 43px;
+    height: 43px;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.send-button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.disclaimer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 12px;
+}
+
+@media(max-width: 700px) {
+    .sidebar {
+        display: none;
+    }
+
+    .topbar {
+        height: 65px;
+        padding: 0 18px;
+    }
+
+    .chat-area {
+        padding: 20px 15px;
+    }
+
+    .welcome h1 {
+        font-size: 26px;
+    }
+
+    .suggestions {
+        grid-template-columns: 1fr;
+    }
+
+    .composer-wrapper {
+        padding: 12px;
+    }
+
+    .message {
+        max-width: 95%;
+    }
+}
+</style></head><body><div class="app"><aside class="sidebar">
+    <div class="logo">NEXORA <span>AI</span></div>
+
+    <button class="new-chat" id="newChat">
+        + Nouvelle conversation
+    </button>
+
+    <div class="sidebar-label">CONVERSATIONS</div>
+
+    <div class="history-empty">
+        Vos conversations apparaîtront ici.
+    </div>
+
+    <div class="sidebar-bottom">
+        ✦ Propulsé par NEXORA
+    </div>
+</aside>
+
+<main class="main">
+
+    <header class="topbar">
+        <h2>NEXORA AI</h2>
+        <div class="status">● Interface prête</div>
+    </header>
+
+    <section class="chat-area" id="chatArea">
+
+        <div class="welcome" id="welcome">
+            <div class="ai-icon">✦</div>
+
+            <h1>Bonjour, bienvenue sur <span>NEXORA AI</span></h1>
+
+            <p>
+                Votre assistant intelligent pour apprendre,
+                créer, réfléchir, développer vos idées et
+                faire avancer vos projets.
+            </p>
+
+            <div class="suggestions">
+                <button class="suggestion">
+                    💡 Aide-moi à développer une idée d'entreprise
+                </button>
+
+                <button class="suggestion">
+                    ✍️ Rédige un texte professionnel
+                </button>
+
+                <button class="suggestion">
+                    📚 Explique-moi un sujet difficile
+                </button>
+
+                <button class="suggestion">
+                    🚀 Propose-moi une stratégie marketing
+                </button>
+            </div>
+        </div>
+
+        <div class="messages" id="messages"></div>
+
+    </section>
+
+    <footer class="composer-wrapper">
+
+        <form class="composer" id="chatForm">
+
+            <textarea
+                id="userInput"
+                placeholder="Posez votre question à NEXORA AI..."
+                rows="1"
+                required
+            ></textarea>
+
+            <button class="send-button" id="sendButton" type="submit">
+                ↑
+            </button>
+
+        </form>
+
+        <div class="disclaimer">
+            NEXORA AI peut faire des erreurs. Vérifiez les informations importantes.
+        </div>
+
+    </footer>
+
+</main>
+
+</div><script>
+const form = document.getElementById("chatForm");
+const input = document.getElementById("userInput");
+const messages = document.getElementById("messages");
+const welcome = document.getElementById("welcome");
+const newChat = document.getElementById("newChat");
+
+function ajouterMessage(texte, type) {
+    const message = document.createElement("div");
+    message.className = "message " + type;
+    message.textContent = texte;
+    messages.appendChild(message);
+
+    document.getElementById("chatArea").scrollTop =
+        document.getElementById("chatArea").scrollHeight;
+}
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const texte = input.value.trim();
+
+    if (!texte) return;
+
+    welcome.style.display = "none";
+
+    ajouterMessage(texte, "user");
+
+    input.value = "";
+
+    ajouterMessage(
+        "NEXORA AI est en cours de configuration. Son moteur d'intelligence artificielle sera bientôt connecté.",
+        "assistant"
+    );
+});
+
+document.querySelectorAll(".suggestion").forEach(button => {
+    button.addEventListener("click", () => {
+        input.value = button.textContent.trim();
+        input.focus();
+    });
+});
+
+newChat.addEventListener("click", () => {
+    messages.innerHTML = "";
+    welcome.style.display = "block";
+    input.value = "";
+    input.focus();
+});
+</script></body>
+</html>
