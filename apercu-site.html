@@ -1,0 +1,940 @@
+<!DOCTYPE html><html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Aperçu du site — NEXORA</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+:root {
+    --primary: #635bff;
+    --secondary: #5148e8;
+    --background: #ffffff;
+    --text: #20263a;
+    --font: Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font);
+    background: #f5f6fa;
+    color: var(--text);
+}
+
+.toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #101426;
+    color: white;
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.toolbar h2 {
+    font-size: 17px;
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 9px;
+}
+
+.toolbar-button {
+    border: 1px solid #444a60;
+    background: #252a40;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.toolbar-button.primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.toolbar-button:hover {
+    opacity: .85;
+}
+
+.loading,
+.error {
+    max-width: 650px;
+    margin: 100px auto;
+    padding: 25px;
+    text-align: center;
+    line-height: 1.7;
+}
+
+.error {
+    color: #b42318;
+    background: #fff1f0;
+    border-radius: 12px;
+}
+
+#website {
+    display: none;
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--text);
+}
+
+#website.visible {
+    display: block;
+}
+
+.site-header {
+    min-height: 75px;
+    padding: 15px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #eeeeee;
+    background: var(--background);
+}
+
+.site-name {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+}
+
+.site-nav button {
+    border: none;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.site-nav button.active {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.hero {
+    padding: 100px 7%;
+    text-align: center;
+    background: var(--background);
+}
+
+.hero h1 {
+    font-size: clamp(32px, 5vw, 58px);
+    line-height: 1.2;
+    max-width: 900px;
+    margin: 0 auto 22px;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.8;
+    font-size: 17px;
+    opacity: .75;
+}
+
+.hero-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 27px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.sections {
+    padding: 25px 7% 70px;
+}
+
+.section {
+    padding: 45px 0;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-heading h2 {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.section-heading p {
+    opacity: .7;
+    line-height: 1.7;
+}
+
+.section-text {
+    max-width: 850px;
+    margin: auto;
+    line-height: 1.9;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.section-card {
+    padding: 25px;
+    border: 1px solid #e8eaf0;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 8px 25px #10142608;
+}
+
+.section-card h3 {
+    margin-bottom: 12px;
+}
+
+.section-card p {
+    line-height: 1.7;
+    color: #667085;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 13px;
+}
+
+.site-footer {
+    padding: 35px 7%;
+    text-align: center;
+    background: #101426;
+    color: white;
+    line-height: 1.8;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 35px;
+    color: #8991a5;
+}
+
+@media(max-width: 750px) {
+    .toolbar {
+        padding: 12px;
+    }
+
+    .toolbar h2 {
+        font-size: 14px;
+    }
+
+    .toolbar-button {
+        padding: 9px;
+        font-size: 11px;
+    }
+
+    .site-header {
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    .site-nav {
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .hero {
+        padding: 75px 20px;
+    }
+
+    .sections {
+        padding: 20px;
+    }
+
+    .section-grid,
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-card {
+        padding: 20px;
+    }
+}
+</style></head><body><header class="toolbar"><h2>✦ NEXORA — Aperçu du site</h2>
+
+<div class="toolbar-actions">
+
+    <button class="toolbar-button" id="backButton">
+        ← Éditeur
+    </button>
+
+    <button class="toolbar-button primary" id="reloadButton">
+        ↻ Actualiser
+    </button>
+
+</div>
+
+</header><div class="loading" id="loading">
+    <h2>Chargement de votre site...</h2>
+    <p>NEXORA prépare votre aperçu.</p>
+</div><div class="error" id="errorBox" style="display:none;"></div><main id="website"><header class="site-header">
+
+    <div class="site-name" id="siteName"></div>
+
+    <nav class="site-nav" id="siteNavigation"></nav>
+
+</header>
+
+<section class="hero" id="hero">
+
+    <h1 id="heroTitle"></h1>
+
+    <p id="heroDescription"></p>
+
+    <a href="#" class="hero-button" id="heroButton"
+       style="display:none;"></a>
+
+</section>
+
+<div class="sections" id="sectionsContainer"></div>
+
+<footer class="site-footer" id="siteFooter">
+    <p id="footerText"></p>
+    <p>Créé avec NEXORA</p>
+</footer>
+
+</main><script>
+/* =========================================
+   CONFIGURATION SUPABASE
+========================================= */
+
+const SUPABASE_URL =
+"https://klvgazjmrxflcrfzauao.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* =========================================
+   ÉLÉMENTS
+========================================= */
+
+const loading = document.getElementById("loading");
+const errorBox = document.getElementById("errorBox");
+const websiteElement = document.getElementById("website");
+
+const websiteId = new URLSearchParams(
+    window.location.search
+).get("id");
+
+let websiteData = null;
+let websitePages = [];
+let websiteSections = [];
+let websiteSettings = null;
+
+
+/* =========================================
+   SÉCURITÉ AFFICHAGE TEXTE
+========================================= */
+
+function afficherTexte(element, value, fallback = "") {
+
+    element.textContent =
+        value === null || value === undefined
+            ? fallback
+            : String(value);
+
+}
+
+
+/* =========================================
+   ERREURS
+========================================= */
+
+function showError(message) {
+
+    loading.style.display = "none";
+
+    websiteElement.classList.remove("visible");
+
+    errorBox.style.display = "block";
+
+    errorBox.textContent = message;
+
+}
+
+
+/* =========================================
+   CHARGEMENT DU SITE
+========================================= */
+
+async function chargerSite() {
+
+    try {
+
+        loading.style.display = "block";
+
+        errorBox.style.display = "none";
+
+        websiteElement.classList.remove("visible");
+
+        if (!websiteId) {
+            throw new Error(
+                "Identifiant du site manquant dans l'adresse."
+            );
+        }
+
+        /* Vérification utilisateur */
+
+        const {
+            data: { user },
+            error: authError
+        } = await supabaseClient.auth.getUser();
+
+        if (authError) throw authError;
+
+        if (!user) {
+
+            window.location.href = "connexion.html";
+
+            return;
+        }
+
+
+        /* Récupération du site */
+
+        const { data: site, error: siteError } =
+            await supabaseClient
+                .from("websites")
+                .select("*")
+                .eq("id", websiteId)
+                .eq("user_id", user.id)
+                .single();
+
+        if (siteError) throw siteError;
+
+        if (!site) {
+            throw new Error("Ce site est introuvable.");
+        }
+
+        websiteData = site;
+
+
+        /* Paramètres graphiques */
+
+        const { data: settings, error: settingsError } =
+            await supabaseClient
+                .from("website_settings")
+                .select("*")
+                .eq("website_id", websiteId)
+                .maybeSingle();
+
+        if (settingsError) throw settingsError;
+
+        websiteSettings = settings;
+
+
+        /* Pages */
+
+        const { data: pages, error: pagesError } =
+            await supabaseClient
+                .from("website_pages")
+                .select("*")
+                .eq("website_id", websiteId)
+                .order("page_order", { ascending: true });
+
+        if (pagesError) throw pagesError;
+
+        websitePages = pages || [];
+
+
+        /* Sections visibles */
+
+        const { data: sections, error: sectionsError } =
+            await supabaseClient
+                .from("website_sections")
+                .select("*")
+                .eq("website_id", websiteId)
+                .eq("is_visible", true)
+                .order("section_order", { ascending: true });
+
+        if (sectionsError) throw sectionsError;
+
+        websiteSections = sections || [];
+
+
+        /* Affichage */
+
+        appliquerParametres();
+
+        afficherNavigation();
+
+        if (websitePages.length > 0) {
+
+            afficherPage(websitePages[0].id);
+
+        } else {
+
+            afficherPage(null);
+
+        }
+
+        loading.style.display = "none";
+
+        websiteElement.classList.add("visible");
+
+    } catch (error) {
+
+        console.error("Erreur NEXORA :", error);
+
+        showError(
+            error.message ||
+            "Impossible de charger l'aperçu du site."
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   PARAMÈTRES GRAPHIQUES
+========================================= */
+
+function appliquerParametres() {
+
+    if (!websiteSettings) return;
+
+    const settings = websiteSettings;
+
+    const root = document.documentElement;
+
+    if (settings.primary_color) {
+        root.style.setProperty(
+            "--primary",
+            settings.primary_color
+        );
+    }
+
+    if (settings.secondary_color) {
+        root.style.setProperty(
+            "--secondary",
+            settings.secondary_color
+        );
+    }
+
+    if (settings.background_color) {
+        root.style.setProperty(
+            "--background",
+            settings.background_color
+        );
+    }
+
+    if (settings.text_color) {
+        root.style.setProperty(
+            "--text",
+            settings.text_color
+        );
+    }
+
+    if (settings.font_family) {
+        root.style.setProperty(
+            "--font",
+            settings.font_family
+        );
+    }
+
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function afficherNavigation() {
+
+    const navigation =
+        document.getElementById("siteNavigation");
+
+    navigation.innerHTML = "";
+
+    websitePages.forEach(page => {
+
+        const button = document.createElement("button");
+
+        button.textContent = page.name || "Page";
+
+        button.addEventListener("click", () => {
+
+            afficherPage(page.id);
+
+        });
+
+        navigation.appendChild(button);
+
+    });
+
+}
+
+
+/* =========================================
+   EXTRACTION DU CONTENU JSON
+========================================= */
+
+function obtenirContenu(section) {
+
+    let content = section.content || {};
+
+    if (typeof content === "string") {
+
+        try {
+            content = JSON.parse(content);
+        } catch (error) {
+            content = { text: content };
+        }
+
+    }
+
+    return content;
+
+}
+
+
+function obtenirValeur(content, keys, fallback = "") {
+
+    for (const key of keys) {
+
+        if (
+            content[key] !== undefined &&
+            content[key] !== null &&
+            content[key] !== ""
+        ) {
+            return content[key];
+        }
+
+    }
+
+    return fallback;
+
+}
+
+
+/* =========================================
+   AFFICHAGE D'UNE PAGE
+========================================= */
+
+function afficherPage(pageId) {
+
+    const page = websitePages.find(
+        item => item.id === pageId
+    );
+
+    const pageSections = websiteSections.filter(
+        section => !section.page_id || section.page_id === pageId
+    );
+
+    const siteName =
+        websiteData.name || "Mon site";
+
+    afficherTexte(
+        document.getElementById("siteName"),
+        siteName
+    );
+
+    const heroTitle = document.getElementById("heroTitle");
+
+    const heroDescription =
+        document.getElementById("heroDescription");
+
+    afficherTexte(
+        heroTitle,
+        page?.name || siteName
+    );
+
+    afficherTexte(
+        heroDescription,
+        websiteData.description || "Bienvenue sur notre site."
+    );
+
+    const heroButton = document.getElementById("heroButton");
+
+    heroButton.style.display = "none";
+
+    const container =
+        document.getElementById("sectionsContainer");
+
+    container.innerHTML = "";
+
+
+    /* Navigation active */
+
+    document.querySelectorAll(".site-nav button").forEach(
+        (button, index) => {
+
+            button.classList.toggle(
+                "active",
+                websitePages[index]?.id === pageId
+            );
+
+        }
+    );
+
+
+    /* Sections */
+
+    if (pageSections.length === 0) {
+
+        container.innerHTML = `
+            <div class="empty-state">
+                <h3>Cette page ne contient pas encore de sections.</h3>
+                <p>Ajoutez du contenu depuis l'éditeur NEXORA.</p>
+            </div>
+        `;
+
+    }
+
+
+    pageSections.forEach(section => {
+
+        const content = obtenirContenu(section);
+
+        const type = String(
+            section.section_type || "text"
+        ).toLowerCase();
+
+        const title = obtenirValeur(
+            content,
+            ["title", "titre", "heading"],
+            section.title || ""
+        );
+
+        const description = obtenirValeur(
+            content,
+            ["description", "text", "texte", "content"],
+            ""
+        );
+
+        const block = document.createElement("section");
+
+        block.className = "section";
+
+
+        const heading = document.createElement("div");
+
+        heading.className = "section-heading";
+
+        if (title) {
+
+            const h2 = document.createElement("h2");
+
+            h2.textContent = title;
+
+            heading.appendChild(h2);
+
+        }
+
+        if (description && !["gallery", "portfolio"].includes(type)) {
+
+            const p = document.createElement("p");
+
+            p.textContent = description;
+
+            heading.appendChild(p);
+
+        }
+
+        block.appendChild(heading);
+
+
+        /* Services, avantages, équipe et fonctionnalités */
+
+        if (
+            ["services", "advantages", "features",
+             "team", "cards", "benefits"].includes(type)
+        ) {
+
+            const grid = document.createElement("div");
+
+            grid.className = "section-grid";
+
+            let items = content.items || content.cards || [];
+
+            if (!Array.isArray(items)) items = [];
+
+            items.forEach(item => {
+
+                const card = document.createElement("article");
+
+                card.className = "section-card";
+
+                const h3 = document.createElement("h3");
+
+                h3.textContent =
+                    typeof item === "string"
+                        ? item
+                        : item.title || item.name || "Élément";
+
+                const p = document.createElement("p");
+
+                p.textContent =
+                    typeof item === "string"
+                        ? ""
+                        : item.description || item.text || "";
+
+                card.appendChild(h3);
+
+                card.appendChild(p);
+
+                grid.appendChild(card);
+
+            });
+
+            block.appendChild(grid);
+
+        }
+
+        /* Galerie et portfolio */
+
+        else if (
+            ["gallery", "portfolio"].includes(type)
+        ) {
+
+            const gallery = document.createElement("div");
+
+            gallery.className = "gallery-grid";
+
+            let images = content.images || content.items || [];
+
+            if (!Array.isArray(images)) images = [];
+
+            images.forEach(item => {
+
+                const url =
+                    typeof item === "string"
+                        ? item
+                        : item.url || item.image || "";
+
+                if (!url) return;
+
+                try {
+
+                    const parsed = new URL(url);
+
+                    if (!["http:", "https:"].includes(parsed.protocol)) return;
+
+                } catch (error) {
+                    return;
+                }
+
+                const img = document.createElement("img");
+
+                img.src = url;
+
+                img.alt =
+                    typeof item === "object"
+                        ? item.alt || "Image du site"
+                        : "Image du site";
+
+                img.loading = "lazy";
+
+                gallery.appendChild(img);
+
+            });
+
+            block.appendChild(gallery);
+
+        }
+
+        /* Contenu classique */
+
+        else {
+
+            const text = document.createElement("div");
+
+            text.className = "section-text";
+
+            text.textContent = description || title || "";
+
+            block.appendChild(text);
+
+        }
+
+        container.appendChild(block);
+
+    });
+
+
+    /* Pied de page */
+
+    afficherTexte(
+        document.getElementById("footerText"),
+        websiteData.name || "Mon site"
+    );
+
+}
+
+
+/* =========================================
+   RETOUR À L'ÉDITEUR
+========================================= */
+
+document.getElementById("backButton").addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "editeur-site.html?id=" +
+            encodeURIComponent(websiteId);
+
+    }
+);
+
+
+/* =========================================
+   ACTUALISATION
+========================================= */
+
+document.getElementById("reloadButton").addEventListener(
+    "click",
+    () => {
+
+        chargerSite();
+
+    }
+);
+
+
+/* =========================================
+   LANCEMENT
+========================================= */
+
+chargerSite();
+
+</script></body>
+</html>
