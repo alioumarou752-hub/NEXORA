@@ -375,6 +375,10 @@
 
         .service-btn {
             width: 100%;
+          display: block;
+text-align: center;
+text-decoration: none;
+box-sizing: border-box;
 
             border: none;
 
@@ -726,23 +730,78 @@ const services = {
         ]
 
     }
+    ,
 
+    "NEXORA AI": {
+
+        icon: "🤖",
+
+        title: "NEXORA AI",
+
+        description:
+        "Un assistant intelligent pour vous aider à réfléchir, créer, apprendre et développer vos idées.",
+
+        section:
+        "Découvrez les capacités de votre assistant intelligent",
+
+        items: [
+
+            {
+                icon: "🧠",
+                title: "Assistant intelligent",
+                description:
+                "Discutez avec une intelligence artificielle capable de répondre à vos questions, analyser vos idées et vous accompagner dans vos projets.",
+                service: "NEXORA AI"
+            }
+
+        ]
+
+    }
 };
 
 
+
 /* =========================
-   RÉCUPÉRER LE SERVICE
+RÉCUPÉRER ET IDENTIFIER LE SERVICE
 ========================= */
 
-const params =
-new URLSearchParams(
-    window.location.search
-);
+const params = new URLSearchParams(window.location.search);
 
-const serviceName =
-params.get("service") || "Site web";
+const requestedService =
+params.get("service") ||
+params.get("categorie") ||
+params.get("category") ||
+params.get("nom") ||
+"Site web";
 
+// Normaliser les noms pour éviter les différences
+function normaliserService(nom) {
+return nom
+.toLowerCase()
+.trim()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g, "")
+.replace(/[^a-z0-9]/g, "");
+}
 
+const nomNormalise = normaliserService(requestedService);
+
+// Identifier automatiquement NEXORA AI
+let serviceName;
+
+if (
+nomNormalise.includes("nexoraai") ||
+nomNormalise === "ai" ||
+nomNormalise === "ia" ||
+nomNormalise.includes("assistantintelligent") ||
+nomNormalise.includes("assistantia")
+) {
+serviceName = "NEXORA AI";
+} else {
+serviceName = Object.keys(services).find(
+nom => normaliserService(nom) === nomNormalise
+) || requestedService.trim();
+}
 /* =========================
    AFFICHER LE SERVICE
 ========================= */
@@ -848,23 +907,30 @@ function afficherService() {
             </ul>
 
             ${
-                item.title === "Site vitrine"
-                    ? `
-                        <a
-                            href="site-vitrine.html"
-                            class="service-btn">
-                            Créer mon site vitrine →
-                        </a>
-                      `
-                    : `
-                        <button
-                            onclick="demanderService('${item.title}')"
-                            class="service-btn">
-                            Demander cette solution →
-                        </button>
-                      `
+    item.title === "Site vitrine"
+        ? `
+            <a
+                href="site-vitrine.html"
+                class="service-btn">
+                Créer mon site vitrine →
+            </a>
+          `
+        : item.title === "Assistant intelligent"
+        ? `
+            <a
+                href="nexora-ai.html"
+                class="service-btn">
+                Lancer NEXORA AI →
+            </a>
+          `
+        : `
+            <button
+                onclick="demanderService('${item.title}')"
+                class="service-btn">
+                Demander cette solution →
+            </button>
+          `
             }
-
         </article>
 
     `).join("");
