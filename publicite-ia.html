@@ -1,1 +1,945 @@
 
+}
+
+.hero p {
+    color: #dce6ff;
+    line-height: 1.7;
+    max-width: 650px;
+}
+
+.section-title {
+    margin: 30px 0 18px;
+}
+
+.section-title h2 {
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.section-title p {
+    color: #778197;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.tool-card {
+    background: white;
+    border: 1px solid #e7eaf0;
+    padding: 23px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.tool-card:hover,
+.tool-card.active {
+    border-color: #2862e8;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(30, 75, 170, 0.10);
+}
+
+.tool-icon {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.tool-card h3 {
+    font-size: 16px;
+    margin-bottom: 9px;
+}
+
+.tool-card p {
+    color: #7a8498;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.form-box {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    margin-top: 25px;
+    border: 1px solid #e8ebf1;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 19px 0 9px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #dce1eb;
+    border-radius: 9px;
+    font-size: 14px;
+    outline: none;
+    background: white;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #2862e8;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.main-button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #2457e6;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.main-button:hover {
+    background: #1745c7;
+}
+
+.green-button {
+    background: #15945b;
+}
+
+.green-button:hover {
+    background: #107849;
+}
+
+.dark-button {
+    background: #172033;
+}
+
+.dark-button:hover {
+    background: #303c53;
+}
+
+.result {
+    display: none;
+    background: #eef4ff;
+    border: 1px solid #d4e1ff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.result h3 {
+    margin-bottom: 12px;
+}
+
+.result textarea {
+    min-height: 230px;
+    margin-top: 12px;
+    line-height: 1.6;
+}
+
+.history-card {
+    background: #f8faff;
+    border: 1px solid #e1e8f5;
+    border-radius: 12px;
+    padding: 17px;
+    margin-top: 14px;
+}
+
+.history-card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.history-card p {
+    font-size: 13px;
+    color: #69758a;
+    margin-top: 5px;
+    line-height: 1.5;
+}
+
+.history-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 14px;
+}
+
+.small-button {
+    padding: 10px 13px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.download-button {
+    background: #2457e6;
+}
+
+.delete-button {
+    background: #dc3545;
+}
+
+.empty-history {
+    background: #f8faff;
+    padding: 22px;
+    border-radius: 12px;
+    text-align: center;
+    color: #7a8498;
+    font-size: 14px;
+}
+
+.history-count {
+    display: inline-block;
+    background: #eaf0ff;
+    color: #2457e6;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.module {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e8ebf1;
+}
+
+.module h3 {
+    font-size: 14px;
+    margin-bottom: 9px;
+}
+
+.module p {
+    color: #7a8498;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+footer {
+    text-align: center;
+    padding: 35px 15px;
+    color: #8b94a5;
+    font-size: 12px;
+}
+
+@media(max-width: 500px) {
+    .hero h1 {
+        font-size: 25px;
+    }
+
+    .container {
+        width: 92%;
+    }
+
+    .form-box {
+        padding: 18px;
+    }
+
+    header {
+        padding: 16px 4%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        NEXORA <span>AD STUDIO</span>
+    </div>
+
+    <div class="premium">
+        PREMIUM STUDIO
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <h1>Donnez vie à vos publicités.</h1>
+
+        <p>
+            Bienvenue dans NEXORA AD STUDIO.
+            Préparez vos concepts publicitaires,
+            développez votre identité de marque
+            et construisez vos campagnes marketing
+            dans un espace professionnel.
+        </p>
+    </section>
+
+    <section class="section-title">
+        <h2>Votre espace créatif</h2>
+        <p>Choisissez le type de création que vous souhaitez réaliser.</p>
+    </section>
+
+    <section class="tools">
+
+        <div class="tool-card active"
+        onclick="choisirOutil(this, 'Publicité vidéo')">
+
+            <div class="tool-icon">🎬</div>
+            <h3>Publicité vidéo</h3>
+            <p>Préparez un concept vidéo publicitaire pour présenter votre entreprise.</p>
+
+        </div>
+
+        <div class="tool-card"
+        onclick="choisirOutil(this, 'Visuel publicitaire')">
+
+            <div class="tool-icon">🎨</div>
+            <h3>Visuel publicitaire</h3>
+            <p>Concevez le brief d'une affiche, d'un visuel ou d'une bannière.</p>
+
+        </div>
+
+        <div class="tool-card"
+        onclick="choisirOutil(this, 'Campagne marketing')">
+
+            <div class="tool-icon">📈</div>
+            <h3>Campagne marketing</h3>
+            <p>Préparez une stratégie de communication pour votre marque.</p>
+
+        </div>
+
+        <div class="tool-card"
+        onclick="choisirOutil(this, 'Script publicitaire')">
+
+            <div class="tool-icon">✍️</div>
+            <h3>Script publicitaire</h3>
+            <p>Préparez le texte et le scénario de votre prochaine publicité.</p>
+
+        </div>
+
+    </section>
+
+    <section class="form-box">
+
+        <div class="section-title">
+            <h2>Brand Intelligence</h2>
+            <p>Présentez votre entreprise pour préparer votre projet publicitaire.</p>
+        </div>
+
+        <form id="publiciteForm">
+
+            <label>Type de création</label>
+
+            <input
+                type="text"
+                id="typeCreation"
+                value="Publicité vidéo"
+                readonly
+            >
+
+            <label>Nom de votre entreprise ou marque</label>
+
+            <input
+                type="text"
+                id="entreprise"
+                placeholder="Exemple : NEXORA"
+                required
+            >
+
+            <label>Votre produit ou service</label>
+
+            <input
+                type="text"
+                id="produit"
+                placeholder="Que souhaitez-vous promouvoir ?"
+                required
+            >
+
+            <label>Objectif publicitaire</label>
+
+            <select id="objectif" required>
+                <option value="">Choisir un objectif</option>
+                <option>Augmenter les ventes</option>
+                <option>Faire connaître ma marque</option>
+                <option>Attirer de nouveaux clients</option>
+                <option>Lancer un nouveau produit</option>
+                <option>Développer mon entreprise</option>
+            </select>
+
+            <label>Public cible</label>
+
+            <input
+                type="text"
+                id="cible"
+                placeholder="Exemple : jeunes, entrepreneurs, entreprises..."
+                required
+            >
+
+            <label>Style publicitaire</label>
+
+            <select id="style" required>
+                <option value="">Choisir un style</option>
+                <option>Professionnel et élégant</option>
+                <option>Moderne et dynamique</option>
+                <option>Luxe et premium</option>
+                <option>Créatif et original</option>
+                <option>Minimaliste</option>
+                <option>Émotionnel</option>
+            </select>
+
+            <label>Décrivez votre idée</label>
+
+            <textarea
+                id="description"
+                placeholder="Expliquez ce que vous souhaitez obtenir..."
+            ></textarea>
+
+            <button type="submit" class="main-button">
+                Préparer mon projet publicitaire →
+            </button>
+
+        </form>
+
+        <div class="result" id="resultat"></div>
+
+    </section>
+
+    <!-- HISTORIQUE DES PROJETS -->
+
+    <section class="form-box" id="historiqueBox">
+
+        <div class="section-title">
+
+            <h2>📁 Mes projets publicitaires</h2>
+
+            <p>
+                Retrouvez, téléchargez et gérez vos créations enregistrées.
+            </p>
+
+        </div>
+
+        <p class="history-count" id="nombreProjets">
+            0 projet
+        </p>
+
+        <div id="listeHistorique" style="margin-top:18px;">
+
+            <div class="empty-history">
+                Aucun projet enregistré pour le moment.
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="section-title">
+        <h2>Les technologies du studio</h2>
+        <p>Les modules qui composeront l'environnement créatif de NEXORA.</p>
+    </section>
+
+    <section class="modules">
+
+        <div class="module">
+            <h3>🧠 Brand Intelligence</h3>
+            <p>Analyse de marque et identité commerciale.</p>
+        </div>
+
+        <div class="module">
+            <h3>🎯 Creative Director IA</h3>
+            <p>Conception et développement des concepts créatifs.</p>
+        </div>
+
+        <div class="module">
+            <h3>🎥 Video Production</h3>
+            <p>Préparation de projets vidéo publicitaires.</p>
+        </div>
+
+        <div class="module">
+            <h3>🌍 Multi-Format Studio</h3>
+            <p>Préparation de contenus pour plusieurs plateformes.</p>
+        </div>
+
+        <div class="module">
+            <h3>📊 Campaign Intelligence</h3>
+            <p>Organisation et planification des campagnes.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    © 2026 NEXORA — AD STUDIO PREMIUM
+    <br><br>
+    Creative Intelligence. Global Innovation.
+</footer>
+
+<script>
+
+let typeSelectionne = "Publicité vidéo";
+
+const CLE_HISTORIQUE = "nexoraProjets";
+
+/* CHOISIR UN TYPE DE CRÉATION */
+
+function choisirOutil(element, type) {
+
+    document.querySelectorAll(".tool-card").forEach(card => {
+        card.classList.remove("active");
+    });
+
+    element.classList.add("active");
+
+    typeSelectionne = type;
+
+    document.getElementById("typeCreation").value = type;
+}
+
+/* PROTECTION DES TEXTES */
+
+function securiser(texte) {
+
+    return String(texte).replace(/[&<>"']/g, function(caractere) {
+
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        }[caractere];
+
+    });
+}
+
+/* LIRE L'HISTORIQUE */
+
+function lireProjets() {
+
+    try {
+
+        const donnees = localStorage.getItem(CLE_HISTORIQUE);
+
+        const projets = donnees ? JSON.parse(donnees) : [];
+
+        return Array.isArray(projets) ? projets : [];
+
+    } catch(erreur) {
+
+        console.error("Erreur de lecture :", erreur);
+
+        return [];
+
+    }
+}
+
+/* ENREGISTRER L'HISTORIQUE */
+
+function sauvegarderProjets(projets) {
+
+    try {
+
+        localStorage.setItem(
+            CLE_HISTORIQUE,
+            JSON.stringify(projets)
+        );
+
+        return true;
+
+    } catch(erreur) {
+
+        alert("Impossible de sauvegarder. Vérifiez l'espace disponible du navigateur.");
+
+        return false;
+
+    }
+}
+
+/* GÉNÉRER LE PROMPT PUBLICITAIRE */
+
+function creerPrompt(projet) {
+
+    return `
+Tu es un directeur artistique et expert international en publicité et marketing.
+
+Crée une campagne publicitaire professionnelle à partir des informations suivantes.
+
+ENTREPRISE : ${projet.entreprise}
+
+TYPE DE CRÉATION : ${projet.type}
+
+PRODUIT OU SERVICE : ${projet.produit}
+
+OBJECTIF : ${projet.objectif}
+
+PUBLIC CIBLE : ${projet.cible}
+
+STYLE : ${projet.style}
+
+DESCRIPTION : ${projet.description || "Non précisée"}
+
+INSTRUCTIONS :
+
+1. Propose une idée créative originale.
+2. Crée un titre publicitaire accrocheur.
+3. Rédige un texte publicitaire professionnel.
+4. Invente un slogan mémorable.
+5. Décris un concept visuel détaillé.
+6. Ajoute un appel à l'action.
+7. Propose des recommandations de diffusion.
+
+Adapte la proposition à une entreprise internationale.
+
+Présente le résultat de manière claire, professionnelle et structurée.
+`;
+}
+
+/* TÉLÉCHARGER UN PROJET */
+
+function telechargerProjet(projet) {
+
+    const contenu = `
+NEXORA AD STUDIO PREMIUM
+========================
+
+ENTREPRISE : ${projet.entreprise}
+
+PRODUIT : ${projet.produit}
+
+TYPE : ${projet.type}
+
+OBJECTIF : ${projet.objectif}
+
+PUBLIC CIBLE : ${projet.cible}
+
+STYLE : ${projet.style}
+
+DESCRIPTION : ${projet.description || "Non précisée"}
+
+DATE : ${projet.date}
+
+========================
+PROMPT PUBLICITAIRE
+========================
+
+${projet.prompt}
+`;
+
+    const fichier = new Blob(
+        [contenu],
+        {type: "text/plain;charset=utf-8"}
+    );
+
+    const url = URL.createObjectURL(fichier);
+
+    const lien = document.createElement("a");
+
+    lien.href = url;
+
+    lien.download = "NEXORA-" +
+        projet.entreprise.replace(/[^a-z0-9]/gi, "-") +
+        ".txt";
+
+    document.body.appendChild(lien);
+
+    lien.click();
+
+    lien.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+/* AFFICHER LES PROJETS ENREGISTRÉS */
+
+function afficherHistorique() {
+
+    const projets = lireProjets();
+
+    const liste = document.getElementById("listeHistorique");
+
+    const compteur = document.getElementById("nombreProjets");
+
+    compteur.textContent =
+        projets.length + (projets.length > 1 ? " projets" : " projet");
+
+    if(projets.length === 0) {
+
+        liste.innerHTML = `
+            <div class="empty-history">
+                📂 Aucun projet enregistré pour le moment.
+                <br><br>
+                Préparez votre première publicité !
+            </div>
+        `;
+
+        return;
+    }
+
+    liste.innerHTML = projets.map(projet => `
+
+        <div class="history-card">
+
+            <h3>📌 ${securiser(projet.entreprise)}</h3>
+
+            <p>
+                <strong>Type :</strong>
+                ${securiser(projet.type)}
+            </p>
+
+            <p>
+                <strong>Produit :</strong>
+                ${securiser(projet.produit)}
+            </p>
+
+            <p>
+                <strong>Date :</strong>
+                ${securiser(projet.date)}
+            </p>
+
+            <div class="history-actions">
+
+                <button
+                    class="small-button download-button"
+                    onclick="telechargerProjetParId('${securiser(projet.id)}')"
+                >
+                    📥 Télécharger
+                </button>
+
+                <button
+                    class="small-button delete-button"
+                    onclick="supprimerProjet('${securiser(projet.id)}')"
+                >
+                    🗑️ Supprimer
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+/* TÉLÉCHARGER UN ANCIEN PROJET */
+
+function telechargerProjetParId(id) {
+
+    const projets = lireProjets();
+
+    const projet = projets.find(p => String(p.id) === String(id));
+
+    if(!projet) {
+
+        alert("Projet introuvable.");
+
+        return;
+    }
+
+    telechargerProjet(projet);
+}
+
+/* SUPPRIMER UN PROJET */
+
+function supprimerProjet(id) {
+
+    const confirmation = confirm(
+        "Voulez-vous vraiment supprimer ce projet ?"
+    );
+
+    if(!confirmation) return;
+
+    const projets = lireProjets();
+
+    const nouveauxProjets = projets.filter(
+        projet => String(projet.id) !== String(id)
+    );
+
+    if(sauvegarderProjets(nouveauxProjets)) {
+
+        afficherHistorique();
+
+    }
+
+}
+
+/* GÉNÉRER UN NOUVEAU PROJET */
+
+document.getElementById("publiciteForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const projet = {
+
+        id: Date.now().toString(),
+
+        entreprise: document.getElementById("entreprise").value.trim(),
+
+        produit: document.getElementById("produit").value.trim(),
+
+        type: typeSelectionne,
+
+        objectif: document.getElementById("objectif").value,
+
+        cible: document.getElementById("cible").value.trim(),
+
+        style: document.getElementById("style").value,
+
+        description: document.getElementById("description").value.trim(),
+
+        date: new Date().toLocaleString("fr-FR")
+
+    };
+
+    projet.prompt = creerPrompt(projet);
+
+    const resultat = document.getElementById("resultat");
+
+    resultat.style.display = "block";
+
+    resultat.innerHTML = `
+
+        <h3>✅ Votre projet publicitaire est prêt !</h3>
+
+        <p><strong>Entreprise :</strong> ${securiser(projet.entreprise)}</p>
+
+        <p><strong>Création :</strong> ${securiser(projet.type)}</p>
+
+        <p><strong>Produit :</strong> ${securiser(projet.produit)}</p>
+
+        <p><strong>Objectif :</strong> ${securiser(projet.objectif)}</p>
+
+        <p><strong>Public cible :</strong> ${securiser(projet.cible)}</p>
+
+        <p><strong>Style :</strong> ${securiser(projet.style)}</p>
+
+        <hr style="margin:18px 0;border:0;border-top:1px solid #d4e1ff;">
+
+        <h3>🧠 Votre prompt intelligent</h3>
+
+        <p>
+            Votre prompt personnalisé est prêt.
+            Vous pouvez le copier ou le télécharger.
+        </p>
+
+        <textarea id="promptGenere" readonly>${securiser(projet.prompt)}</textarea>
+
+        <button type="button" id="copierPrompt" class="main-button">
+            📋 Copier mon prompt
+        </button>
+
+        <button type="button" id="telechargerPrompt" class="main-button dark-button">
+            📥 Télécharger mon projet
+        </button>
+
+        <button type="button" id="enregistrerProjet" class="main-button green-button">
+            💾 Enregistrer mon projet
+        </button>
+
+        <p id="messageAction" style="margin-top:12px;font-weight:bold;"></p>
+
+        <p style="margin-top:15px;font-size:12px;color:#64748b;">
+            La génération automatique par un véritable moteur IA
+            sera ajoutée lors d'une prochaine étape.
+        </p>
+
+    `;
+
+    /* COPIER LE PROMPT */
+
+    document.getElementById("copierPrompt").addEventListener("click", async function() {
+
+        const zone = document.getElementById("promptGenere");
+
+        const message = document.getElementById("messageAction");
+
+        try {
+
+            await navigator.clipboard.writeText(zone.value);
+
+            message.textContent = "✅ Prompt copié avec succès !";
+
+        } catch(erreur) {
+
+            zone.select();
+
+            const copie = document.execCommand("copy");
+
+            message.textContent = copie
+                ? "✅ Prompt copié avec succès !"
+                : "Sélectionnez le texte pour le copier.";
+
+        }
+
+    });
+
+    /* TÉLÉCHARGER LE PROJET */
+
+    document.getElementById("telechargerPrompt").addEventListener("click", function() {
+
+        telechargerProjet(projet);
+
+        document.getElementById("messageAction").textContent =
+            "✅ Votre téléchargement a été lancé.";
+
+    });
+
+    /* ENREGISTRER LE PROJET */
+
+    document.getElementById("enregistrerProjet").addEventListener("click", function() {
+
+        const projets = lireProjets();
+
+        const existe = projets.some(p => String(p.id) === projet.id);
+
+        if(existe) {
+
+            document.getElementById("messageAction").textContent =
+                "Ce projet est déjà enregistré.";
+
+            return;
+        }
+
+        projets.unshift(projet);
+
+        if(sauvegarderProjets(projets)) {
+
+            document.getElementById("messageAction").textContent =
+                "✅ Votre projet a été enregistré avec succès !";
+
+            afficherHistorique();
+
+        }
+
+    });
+
+    resultat.scrollIntoView({behavior: "smooth"});
+
+});
+
+/* CHARGER L'HISTORIQUE AU DÉMARRAGE */
+
+afficherHistorique();
+
+</script>
+
+</body>
+</html>
