@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA VIDEO AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f7f8fc;
+            color: #20243a;
+            font-family: Arial, sans-serif;
+        }
+
+        .video-header {
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #e8eaf0;
+        }
+
+        .video-header-content {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .video-logo {
+            color: #635bff;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .video-main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .video-hero {
+            background: linear-gradient(
+                135deg,
+                #635bff,
+                #3730a3
+            );
+            color: white;
+            padding: 45px 25px;
+            border-radius: 22px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .video-hero h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .video-hero p {
+            line-height: 1.7;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .video-section-title {
+            margin-bottom: 25px;
+        }
+
+        .video-section-title h2 {
+            font-size: 25px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+        }
+
+        .video-card {
+            background: white;
+            border: 1px solid #e8eaf0;
+            border-radius: 18px;
+            padding: 25px;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.07);
+        }
+
+        .video-icon {
+            width: 65px;
+            height: 65px;
+            background: #f0efff;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .video-card h3 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .video-card p {
+            color: #667085;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        .video-card ul {
+            padding-left: 20px;
+            color: #667085;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        .video-button {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background: #635bff;
+            color: white;
+            padding: 13px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .video-button:hover {
+            background: #5148e8;
+        }
+
+        .video-footer {
+            text-align: center;
+            padding: 25px;
+            color: #667085;
+            font-size: 14px;
+        }
+
+        @media(max-width: 600px) {
+
+            .video-main {
+                padding: 25px 15px;
+            }
+
+            .video-hero {
+                padding: 35px 20px;
+            }
+
+            .video-hero h1 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="video-header">
+
+    <div class="video-header-content">
+
+        <div>
+            <div class="video-logo">
+                NEXORA
+            </div>
+
+            <small>VIDEO AI STUDIO</small>
+        </div>
+
+        <a href="dashboard.html"
+           class="btn btn-secondary">
+            ← Retour
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="video-main">
+
+    <section class="video-hero">
+
+        <h1>🎬 NEXORA VIDEO AI</h1>
+
+        <p>
+            Donnez vie à vos idées grâce à
+            l'intelligence artificielle.
+
+            Créez des publicités, des mangas animés
+            et des films depuis un seul espace.
+        </p>
+
+    </section>
+
+
+    <section>
+
+        <div class="video-section-title">
+
+            <h2>Choisissez votre studio</h2>
+
+            <p>
+                Quel type de vidéo souhaitez-vous créer ?
+            </p>
+
+        </div>
+
+
+        <div class="video-grid">
+
+
+            <!-- PUBLICITÉ -->
+
+            <div class="video-card">
+
+                <div class="video-icon">
+                    📢
+                </div>
+
+                <h3>Publicité IA</h3>
+
+                <p>
+                    Créez des publicités professionnelles
+                    pour vos produits, entreprises et marques.
+                </p>
+
+                <ul>
+                    <li>Publicité de produit</li>
+                    <li>Publicité d'entreprise</li>
+                    <li>Publicité TikTok et Facebook</li>
+                </ul>
+
+                <a href="publicite-ia.html"
+                   class="video-button">
+                    Ouvrir Publicité IA →
+                </a>
+
+            </div>
+
+
+            <!-- MANGA -->
+
+            <div class="video-card">
+
+                <div class="video-icon">
+                    🎨
+                </div>
+
+                <h3>Manga IA</h3>
+
+                <p>
+                    Imaginez vos personnages et transformez
+                    vos histoires en mangas animés.
+                </p>
+
+                <ul>
+                    <li>Création de personnages</li>
+                    <li>Histoires et scénarios</li>
+                    <li>Épisodes animés</li>
+                </ul>
+
+                <a href="manga-ia.html"
+                   class="video-button">
+                    Ouvrir Manga IA →
+                </a>
+
+            </div>
+
+
+            <!-- FILMS -->
+
+            <div class="video-card">
+
+                <div class="video-icon">
+                    🎥
+                </div>
+
+                <h3>Films IA</h3>
+
+                <p>
+                    Réalisez vos propres histoires
+                    cinématographiques avec l'intelligence
+                    artificielle.
+                </p>
+
+                <ul>
+                    <li>Courts-métrages</li>
+                    <li>Films d'aventure</li>
+                    <li>Films éducatifs</li>
+                </ul>
+
+                <a href="films-ia.html"
+                   class="video-button">
+                    Ouvrir Films IA →
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="video-footer">
+
+    © 2026 NEXORA — VIDEO AI STUDIO
+
+    <p>Développez vos idées. Créez vos histoires.</p>
+
+</footer>
+
+</body>
+</html>
