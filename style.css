@@ -1399,3 +1399,35 @@ footer p {
     }
 
 }
+.nexora-premium-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    max-width: 230px;
+    padding: 13px 17px;
+    margin-top: 20px;
+    border-radius: 12px;
+    background: linear-gradient(120deg, #2457e6, #5488ff);
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(36, 87, 230, 0.22);
+    transition: all 0.3s ease;
+}
+
+.nexora-premium-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(36, 87, 230, 0.3);
+}
+
+.btn-arrow {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.nexora-premium-btn:hover .btn-arrow {
+    transform: translate(3px, -3px);
+}
