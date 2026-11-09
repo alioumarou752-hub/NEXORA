@@ -908,7 +908,9 @@ document.getElementById("publiciteForm").addEventListener("submit", function(e) 
 
     const projet = {
 
-        id: Date.now().toString(),
+        id: window.projetEnCoursModification
+    ? window.projetEnCoursModification
+    : Date.now().toString(),
 
         entreprise: document.getElementById("entreprise").value.trim(),
 
