@@ -795,6 +795,12 @@ function afficherHistorique() {
                     class="small-button delete-button"
                     onclick="supprimerProjet('${securiser(projet.id)}')"
                 >
+                <button
+    class="small-button edit-button"
+    onclick="modifierProjet('${securiser(projet.id)}')"
+>
+    ✏️ Modifier
+</button>
                     🗑️ Supprimer
                 </button>
 
@@ -847,7 +853,52 @@ function supprimerProjet(id) {
     }
 
 }
+    
+/* MODIFIER UN ANCIEN PROJET */
 
+function modifierProjet(id) {
+
+    const projets = lireProjets();
+
+    const projet = projets.find(
+        p => String(p.id) === String(id)
+    );
+
+    if(!projet) {
+        alert("Projet introuvable.");
+        return;
+    }
+
+    document.getElementById("entreprise").value =
+        projet.entreprise || "";
+
+    document.getElementById("produit").value =
+        projet.produit || "";
+
+    document.getElementById("type").value =
+        projet.type || "";
+
+    document.getElementById("objectif").value =
+        projet.objectif || "";
+
+    document.getElementById("cible").value =
+        projet.cible || "";
+
+    document.getElementById("style").value =
+        projet.style || "";
+
+    document.getElementById("description").value =
+        projet.description || "";
+
+    window.projetEnCoursModification = projet.id;
+
+    document.getElementById("entreprise").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    alert("Ancien projet chargé ! Vous pouvez maintenant le modifier.");
+}
 /* GÉNÉRER UN NOUVEAU PROJET */
 
 document.getElementById("publiciteForm").addEventListener("submit", function(e) {
