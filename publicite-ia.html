@@ -1023,34 +1023,41 @@ document.getElementById("publiciteForm").addEventListener("submit", function(e) 
 
     });
 
-    /* ENREGISTRER LE PROJET */
+    /* ENREGISTRER OU MODIFIER LE PROJET */
 
-    document.getElementById("enregistrerProjet").addEventListener("click", function() {
+document.getElementById("enregistrerProjet").addEventListener("click", function() {
 
-        const projets = lireProjets();
+    const projets = lireProjets();
 
-        const existe = projets.some(p => String(p.id) === projet.id);
+    const index = projets.findIndex(
+        p => String(p.id) === String(projet.id)
+    );
 
-        if(existe) {
+    if(index !== -1) {
 
-            document.getElementById("messageAction").textContent =
-                "Ce projet est déjà enregistré.";
+        projets[index] = projet;
 
-            return;
-        }
+    } else {
 
         projets.unshift(projet);
 
-        if(sauvegarderProjets(projets)) {
+    }
 
-            document.getElementById("messageAction").textContent =
-                "✅ Votre projet a été enregistré avec succès !";
+    if(sauvegarderProjets(projets)) {
 
-            afficherHistorique();
+        window.projetEnCoursModification = null;
 
-        }
+        document.getElementById("messageAction").textContent =
+            index !== -1
+            ? "✅ Votre ancien projet a été modifié avec succès !"
+            : "✅ Votre nouveau projet a été enregistré avec succès !";
 
-    });
+        afficherHistorique();
+
+    }
+
+});
+    
 
     resultat.scrollIntoView({behavior: "smooth"});
 
