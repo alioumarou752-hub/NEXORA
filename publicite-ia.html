@@ -691,6 +691,65 @@ async function synchroniserProjet(projet) {
 
     }
 }
+  /* RÉCUPÉRER LES PROJETS DEPUIS SUPABASE */
+
+async function chargerProjetsSupabase() {
+
+    try {
+
+        const { data: sessionData } =
+            await supabaseClient.auth.getUser();
+
+        if(!sessionData.user) return;
+
+        const { data, error } = await supabaseClient
+            .from("publicite_projets")
+            .select("*")
+            .eq("user_id", sessionData.user.id)
+            .order("created_at", { ascending: false });
+
+        if(error) {
+            console.error("Erreur de récupération :", error);
+            return;
+        }
+
+        const projetsLocaux = lireProjets();
+
+        const projetsSupabase = data.map(p => ({
+            id: p.local_id,
+            entreprise: p.entreprise,
+            produit: p.produit,
+            type: p.type,
+            objectif: p.objectif,
+            cible: p.cible,
+            style: p.style,
+            description: p.description,
+            prompt: p.prompt,
+            date: p.date
+        }));
+
+        const fusion = new Map();
+
+        projetsSupabase.forEach(p => fusion.set(String(p.id), p));
+        projetsLocaux.forEach(p => {
+            if(!fusion.has(String(p.id))) {
+                fusion.set(String(p.id), p);
+            }
+        });
+
+        const historique = Array.from(fusion.values());
+
+        sauvegarderProjets(historique);
+        afficherHistorique();
+
+        console.log("Historique synchronisé !");
+
+    } catch(erreur) {
+
+        console.error("Erreur :", erreur);
+
+    }
+}
 
 /* GÉNÉRER LE PROMPT PUBLICITAIRE */
 
@@ -1103,7 +1162,9 @@ document.getElementById("enregistrerProjet").addEventListener("click", function(
 
     if(sauvegarderProjets(projets)) {
 
-        window.projetEnCoursModification = null;
+    synchroniserProjet(projet);
+
+    window.projetEnCoursModification = null;
 
         document.getElementById("messageAction").textContent =
             index !== -1
