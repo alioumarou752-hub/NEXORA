@@ -1015,10 +1015,17 @@ const SUPABASE_URL = "https://klvgazjmrxflcrfzauao.supabase.co/rest/v1/";
 
 const SUPABASE_KEY = "sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
 
-const supabaseClient =
-window.supabase.createClient(
+const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
-    SUPABASE_KEY
+    SUPABASE_KEY,
+    {
+        auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true,
+            storageKey: "nexora-auth"
+        }
+    }
 );
 document.getElementById("publiciteForm").addEventListener("submit", function(e) {
 

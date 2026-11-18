@@ -456,12 +456,18 @@ const SUPABASE_KEY =
 "sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
 
 
-const supabaseClient =
-window.supabase.createClient(
+const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
-    SUPABASE_KEY
+    SUPABASE_KEY,
+    {
+        auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true,
+            storageKey: "nexora-auth"
+        }
+    }
 );
-
 
 const form =
 document.getElementById("inscriptionForm");
