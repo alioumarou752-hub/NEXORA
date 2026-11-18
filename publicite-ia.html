@@ -1015,7 +1015,8 @@ const SUPABASE_URL = "https://klvgazjmrxflcrfzauao.supabase.co/rest/v1/";
 
 const SUPABASE_KEY = "sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
 
-const supabaseClient = window.supabase.createClient(
+const supabaseClient =
+window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
@@ -1181,9 +1182,11 @@ document.getElementById("enregistrerProjet").addEventListener("click", function(
 
 });
 
-/* CHARGER L'HISTORIQUE AU DÉMARRAGE */
+/* CHARGER ET SYNCHRONISER L'HISTORIQUE */
 
 afficherHistorique();
+
+chargerProjetsSupabase();
 
 </script>
 
