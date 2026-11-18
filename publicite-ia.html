@@ -332,6 +332,7 @@ footer {
     }
 }
 </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -640,6 +641,56 @@ function sauvegarderProjets(projets) {
 
     }
 }
+  /* SYNCHRONISER UN PROJET AVEC SUPABASE */
+
+async function synchroniserProjet(projet) {
+
+    try {
+
+        const { data: utilisateur, error: erreurAuth } =
+            await supabaseClient.auth.getUser();
+
+        if(erreurAuth || !utilisateur.user) {
+            console.log("Utilisateur non connecté : synchronisation reportée.");
+            return false;
+        }
+
+        const donnees = {
+            local_id: String(projet.id),
+            user_id: utilisateur.user.id,
+            entreprise: projet.entreprise,
+            produit: projet.produit,
+            type: projet.type,
+            objectif: projet.objectif,
+            cible: projet.cible,
+            style: projet.style,
+            description: projet.description,
+            prompt: projet.prompt,
+            date: projet.date,
+            updated_at: new Date().toISOString()
+        };
+
+        const { error } = await supabaseClient
+            .from("publicite_projets")
+            .upsert(donnees, {
+                onConflict: "user_id,local_id"
+            });
+
+        if(error) {
+            console.error("Erreur de synchronisation :", error);
+            return false;
+        }
+
+        console.log("Projet synchronisé avec Supabase !");
+        return true;
+
+    } catch(erreur) {
+
+        console.error("Erreur :", erreur);
+        return false;
+
+    }
+}
 
 /* GÉNÉRER LE PROMPT PUBLICITAIRE */
 
@@ -790,17 +841,16 @@ function afficherHistorique() {
                 >
                     📥 Télécharger
                 </button>
-
-                <button
-                    class="small-button delete-button"
-                    onclick="supprimerProjet('${securiser(projet.id)}')"
-                >
-                <button
+<button
     class="small-button edit-button"
     onclick="modifierProjet('${securiser(projet.id)}')"
 >
     ✏️ Modifier
 </button>
+                <button
+                    class="small-button delete-button"
+                    onclick="supprimerProjet('${securiser(projet.id)}')"
+                >
                     🗑️ Supprimer
                 </button>
 
@@ -853,8 +903,7 @@ function supprimerProjet(id) {
     }
 
 }
-    
-/* MODIFIER UN ANCIEN PROJET */
+  /* MODIFIER UN ANCIEN PROJET */
 
 function modifierProjet(id) {
 
@@ -877,7 +926,6 @@ function modifierProjet(id) {
 
     document.getElementById("typeCreation").value =
     projet.type || "Publicité vidéo";
-    
 
     document.getElementById("objectif").value =
         projet.objectif || "";
@@ -900,8 +948,18 @@ function modifierProjet(id) {
 
     alert("Ancien projet chargé ! Vous pouvez maintenant le modifier.");
 }
-/* GÉNÉRER UN NOUVEAU PROJET */
 
+/* GÉNÉRER UN NOUVEAU PROJET */
+/* CONNEXION SUPABASE */
+
+const SUPABASE_URL = "https://klvgazjmrxflcrfzauao.supabase.co/rest/v1/";
+
+const SUPABASE_KEY = "sb_publishable_-3yupW48WBr95MTiiXAfaA_EwL2Zohs";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 document.getElementById("publiciteForm").addEventListener("submit", function(e) {
 
     e.preventDefault();
@@ -1057,7 +1115,6 @@ document.getElementById("enregistrerProjet").addEventListener("click", function(
     }
 
 });
-    
 
     resultat.scrollIntoView({behavior: "smooth"});
 
