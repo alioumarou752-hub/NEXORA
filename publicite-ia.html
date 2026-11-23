@@ -651,8 +651,14 @@ async function synchroniserProjet(projet) {
             await supabaseClient.auth.getUser();
 
         if(erreurAuth || !utilisateur.user) {
-            console.log("Utilisateur non connecté : synchronisation reportée.");
-            return false;
+
+    alert(
+        "Erreur : aucun utilisateur connecté à Supabase. Reconnectez-vous à NEXORA."
+    );
+
+    console.error("Erreur d'authentification :", erreurAuth);
+
+    return false;
         }
 
         const donnees = {
